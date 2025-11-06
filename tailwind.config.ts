@@ -65,25 +65,71 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        "float-slow": {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "25%": { transform: "translate(10px, -10px)" },
+          "50%": { transform: "translate(-10px, -20px)" },
+          "75%": { transform: "translate(-10px, 10px)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { 
+            boxShadow: "var(--neon-glow-sm)",
+            filter: "brightness(1)",
           },
-          to: {
-            height: "0",
+          "50%": { 
+            boxShadow: "var(--neon-glow-md)",
+            filter: "brightness(1.2)",
+          },
+        },
+        "wobble": {
+          "0%, 100%": { transform: "rotate(0deg)" },
+          "25%": { transform: "rotate(1deg)" },
+          "75%": { transform: "rotate(-1deg)" },
+        },
+        "slide-up": {
+          "0%": { 
+            opacity: "0",
+            transform: "translateY(20px)",
+          },
+          "100%": { 
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        "scale-in": {
+          "0%": { 
+            opacity: "0",
+            transform: "scale(0.95)",
+          },
+          "100%": { 
+            opacity: "1",
+            transform: "scale(1)",
           },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "float-slow": "float-slow 20s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 3s ease-in-out infinite",
+        "wobble": "wobble 0.5s ease-in-out",
+        "slide-up": "slide-up 0.6s var(--transition-spring)",
+        "scale-in": "scale-in 0.4s var(--transition-spring)",
+      },
+      backdropBlur: {
+        'xs': '2px',
       },
     },
   },
