@@ -10,11 +10,35 @@ interface ProjectCardProps {
 
 export const ProjectCard = ({ title, description, tags, delay = 0 }: ProjectCardProps) => {
   return (
-    <GlassCard hoverable delay={delay} className="group h-full">
-      <motion.div
-        className="space-y-4"
-        style={{ perspective: '1000px' }}
-      >
+    <motion.div
+      initial={{ opacity: 0, y: 20, rotateX: 10, rotateY: -5 }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 5, rotateY: -2 }}
+      viewport={{ once: true }}
+      transition={{
+        delay,
+        type: 'spring',
+        stiffness: 200,
+        damping: 20,
+      }}
+      whileHover={{
+        y: -10,
+        rotateX: 8,
+        rotateY: 3,
+        scale: 1.02,
+        transition: { 
+          type: 'spring',
+          stiffness: 300,
+          damping: 15
+        },
+      }}
+      style={{ 
+        perspective: '1000px',
+        transformStyle: 'preserve-3d',
+      }}
+      className="h-full"
+    >
+      <GlassCard className="group h-full">
+        <motion.div className="space-y-4">
         <div
           className="w-full h-48 rounded-xl bg-gradient-to-br from-muted to-secondary mb-4 overflow-hidden relative"
           style={{
@@ -58,7 +82,31 @@ export const ProjectCard = ({ title, description, tags, delay = 0 }: ProjectCard
             </motion.span>
           ))}
         </div>
-      </motion.div>
-    </GlassCard>
+
+          {/* Demo Button */}
+          <motion.div className="flex gap-3 pt-4">
+            <motion.a
+              href="#"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex-1 px-4 py-2 rounded-full bg-primary/10 text-accent border border-accent/30 text-center font-medium hover:bg-primary/20 transition-colors"
+              style={{
+                boxShadow: 'inset 0 0 10px rgba(0, 191, 255, 0.1)',
+              }}
+            >
+              Demo
+            </motion.a>
+            <motion.a
+              href="#"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex-1 px-4 py-2 rounded-full bg-secondary/50 text-foreground border border-border/30 text-center font-medium hover:bg-secondary/70 transition-colors"
+            >
+              GitHub
+            </motion.a>
+          </motion.div>
+        </motion.div>
+      </GlassCard>
+    </motion.div>
   );
 };

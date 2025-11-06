@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import digitalSigil from '@/assets/digital-sigil.png';
+import { GlassCard } from './GlassCard';
 
 export const Hero = () => {
   return (
@@ -62,37 +63,71 @@ export const Hero = () => {
             delay: 0.4,
           }}
         >
-          <motion.h1
-            className="text-5xl md:text-7xl font-bold mb-6 text-foreground"
-            onHoverStart={(e) => {
-              (e.currentTarget as HTMLElement).style.animation = 'wobble 0.5s ease-in-out';
-            }}
-            onHoverEnd={(e) => {
-              (e.currentTarget as HTMLElement).style.animation = '';
-            }}
-          >
-            Hello, I'm{' '}
-            <span
-              className="relative inline-block"
-              style={{
-                background: 'linear-gradient(90deg, hsl(var(--foreground)), hsl(var(--accent)))',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+          <GlassCard className="max-w-3xl mx-auto">
+            <motion.div
+              initial={{ scale: 0.98 }}
+              animate={{ scale: 1.02 }}
+              transition={{ 
+                delay: 0.6,
+                type: 'spring',
+                stiffness: 200,
+                damping: 15
               }}
             >
-              Venu
-            </span>
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto"
-          >
-            Let's Build Something Great, Together.
-          </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  delay: 0.4,
+                  type: 'spring',
+                  stiffness: 200,
+                  damping: 20
+                }}
+                className="text-5xl md:text-7xl font-bold mb-4 text-foreground"
+              >
+                Hi, I'm{' '}
+                <span
+                  className="relative inline-block"
+                  style={{
+                    background: 'linear-gradient(90deg, hsl(var(--foreground)), hsl(var(--accent)))',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  Venujan
+                </span>
+              </motion.h1>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  delay: 0.6,
+                  type: 'spring',
+                  stiffness: 200,
+                  damping: 20
+                }}
+                className="text-2xl md:text-3xl font-semibold text-foreground/90 mb-3"
+              >
+                Passionate Developer
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  delay: 0.8,
+                  type: 'spring',
+                  stiffness: 200,
+                  damping: 20
+                }}
+                className="text-lg md:text-xl text-muted-foreground"
+              >
+                Turning ideas into interactive web apps 🚀
+              </motion.p>
+            </motion.div>
+          </GlassCard>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
