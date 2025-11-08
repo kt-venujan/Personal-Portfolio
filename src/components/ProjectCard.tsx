@@ -1,112 +1,110 @@
-import { GlassCard } from './GlassCard';
 import { motion } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
 
-interface ProjectCardProps {
+// Define the types (No Change)
+type ProjectCardProps = {
   title: string;
   description: string;
   tags: string[];
-  delay?: number;
-}
+  delay: number;
+  imageUrl: string;
+  githubUrl: string;
+};
 
-export const ProjectCard = ({ title, description, tags, delay = 0 }: ProjectCardProps) => {
+// --- The Animation Variant ---
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  // ✨ --- 1. BUG FIX --- ✨
+  // I made 'visible' a function so it can use the 'delay' from the 'custom' prop.
+  // Your 'delay' wasn't actually working before!
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 100,
+      damping: 12,
+      delay: delay, // Now the delay is applied!
+    },
+  }),
+};
+
+export const ProjectCard = ({
+  title,
+  description,
+  tags,
+  delay,
+  imageUrl,
+  githubUrl,
+}: ProjectCardProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, rotateX: 10, rotateY: -5 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 5, rotateY: -2 }}
-      viewport={{ once: true }}
-      transition={{
-        delay,
-        type: 'spring',
-        stiffness: 200,
-        damping: 20,
-      }}
-      whileHover={{
-        y: -10,
-        rotateX: 8,
-        rotateY: 3,
-        scale: 1.02,
-        transition: { 
-          type: 'spring',
-          stiffness: 300,
-          damping: 15
-        },
-      }}
-      style={{ 
-        perspective: '1000px',
-        transformStyle: 'preserve-3d',
-      }}
-      className="h-full"
+    <motion.a
+      href={githubUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      // ✨ --- 2. NEW HOVER EFFECT (Card Shadow) --- ✨
+      // Added shadow-xl and a subtle accent shadow on hover
+      className="block rounded-lg overflow-hidden shadow-lg h-full bg-secondary/60 group transition-shadow duration-300 hover:shadow-xl hover:shadow-accent/20"
+      
+      // Animation props (No Change)
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      custom={delay} // This 'delay' is now passed to the 'visible' variant
+      
+      // Hover animation (No Change)
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 15 }}
     >
-      <GlassCard className="group h-full">
-        <motion.div className="space-y-4">
-        <div
-          className="w-full h-48 rounded-xl bg-gradient-to-br from-muted to-secondary mb-4 overflow-hidden relative"
-          style={{
-            boxShadow: 'inset 0 0 20px rgba(0, 191, 255, 0.1)',
-          }}
-        >
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
-            animate={{
-              backgroundPosition: ['0% 0%', '100% 100%'],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              repeatType: 'reverse',
-            }}
-          />
-        </div>
+      
+      {/* --- Image Section (No Change) --- */}
+      <div className="relative overflow-hidden">
+        <img
+          src={imageUrl}
+          alt={title}
+          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
+        />
 
-        <h3 className="text-2xl font-bold text-foreground group-hover:text-accent transition-colors">
+        {/* --- ✨ 3. NEW HOVER EFFECT (Icon Pop) --- ✨
+            It now starts at 90% size and "pops" to 100% on hover.
+        */}
+        <div className="absolute top-4 right-4 p-1.5 bg-black/40 rounded-full opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-in-out">
+          <ExternalLink size={20} className="text-white/90" />
+        </div>
+      </div>
+
+      {/* --- Content Section --- */}
+      <div className="p-6">
+        {/* --- ✨ 4. NEW HOVER EFFECT (Title Color) --- ✨
+            The title now changes to your accent color.
+        */}
+        <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-accent transition-colors duration-300">
           {title}
         </h3>
         
-        <p className="text-muted-foreground leading-relaxed">
-          {description}
-        </p>
-
-        <div className="flex flex-wrap gap-2 pt-4">
-          {tags.map((tag, index) => (
-            <motion.span
+        {/* --- Description Box (No Change) --- */}
+        <div className="h-20 relative overflow-hidden">
+          <p className="text-muted-foreground text-sm">
+            {description}
+          </p>
+          <div className="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-secondary/60 to-transparent" />
+        </div>
+        
+        {/* --- Tags Section --- */}
+        <div className="flex flex-wrap gap-2 mt-4">
+          {tags.map((tag) => (
+            <span
               key={tag}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: delay + 0.1 * index }}
-              className="px-3 py-1 rounded-full text-xs font-medium bg-secondary/50 text-secondary-foreground border border-border/20"
-              style={{
-                boxShadow: 'inset 0 0 10px rgba(0, 191, 255, 0.05)',
-              }}
+              // --- ✨ 5. NEW HOVER EFFECT (Tags Brighten) --- ✨
+              // The tags get a little brighter and pop
+              className="text-xs font-medium bg-accent/20 text-accent px-2 py-1 rounded-full transition-all duration-300 group-hover:bg-accent/30"
             >
               {tag}
-            </motion.span>
+            </span>
           ))}
         </div>
-
-          {/* Demo Button */}
-          <motion.div className="flex gap-3 pt-4">
-            <motion.a
-              href="#"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9 }}
-              className="flex-1 px-4 py-2 rounded-full bg-primary/10 text-accent border border-accent/30 text-center font-medium hover:bg-primary/20 transition-colors"
-              style={{
-                boxShadow: 'inset 0 0 10px rgba(0, 191, 255, 0.1)',
-              }}
-            >
-              Demo
-            </motion.a>
-            <motion.a
-              href="#"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9 }}
-              className="flex-1 px-4 py-2 rounded-full bg-secondary/50 text-foreground border border-border/30 text-center font-medium hover:bg-secondary/70 transition-colors"
-            >
-              GitHub
-            </motion.a>
-          </motion.div>
-        </motion.div>
-      </GlassCard>
-    </motion.div>
+      </div>
+    </motion.a>
   );
 };

@@ -117,6 +117,10 @@ export default {
             transform: "scale(1)",
           },
         },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -127,11 +131,12 @@ export default {
         "wobble": "wobble 0.5s ease-in-out",
         "slide-up": "slide-up 0.6s var(--transition-spring)",
         "scale-in": "scale-in 0.4s var(--transition-spring)",
+        'fade-in': 'fade-in 0.3s ease-out',
       },
       backdropBlur: {
         'xs': '2px',
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require('tailwind-scrollbar-hide')],
 } satisfies Config;

@@ -1,135 +1,188 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import React from "react";
+import { motion, Variants } from "framer-motion"; // Import Variants type
 
-const technicalSkills = [
-  { name: 'Java', level: 90 },
-  { name: 'PHP', level: 85 },
-  { name: 'Laravel', level: 88 },
-  { name: 'React', level: 92 },
-  { name: 'TypeScript', level: 87 },
-  { name: 'SQL', level: 85 },
+const skills = [
+  {
+    name: "HTML",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg",
+  },
+  {
+    name: "CSS",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",
+  },
+  {
+    name: "SASS",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg",
+  },
+  {
+    name: "JAVASCRIPT",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
+  },
+  {
+    name: "REACT JS",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
+  },
+  {
+    name: "GITHUB",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg",
+  },
+  {
+    name: "NODE JS",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg",
+  },
+  {
+    name: "FIREBASE",
+    imgSrc: "https://cdn.worldvectorlogo.com/logos/firebase-1.svg",
+  },
+  {
+    name: "MONGODB",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg",
+  },
+  {
+    name: "DOCKERS",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg",
+  },
 ];
 
-const softSkills = [
-  'Teamwork',
-  'Communication',
-  'Problem Solving',
-  'Adaptability',
-  'Time Management',
-  'Leadership',
-];
+// Animation variants for different elements
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.1,
+    },
+  },
+};
 
-export const Skills = () => {
-  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+const itemVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
+const headingVariants: Variants = {
+  hidden: { y: -50, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" as const } },
+};
+
+const textVariants: Variants = {
+  hidden: { x: -50, opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" as const, delay: 0.3 } },
+};
+
+const skillCardVariants: Variants = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 200,
+      damping: 10,
+    },
+  },
+  hover: {
+    scale: 1.05,
+    boxShadow: "0px 0px 20px rgba(78, 178, 255, 0.6)", // Blue shadow on hover
+    transition: { duration: 0.2 },
+  },
+};
+
+
+const Skills: React.FC = () => {
   return (
-    <section className="min-h-screen py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground"
-        >
-          Skills & Expertise
-        </motion.h2>
+    <div id="skills" className="relative bg-blue-600 min-h-screen flex items-center justify-center p-6 overflow-hidden py-24 mt-16 scroll-mt-24">
+      {/* Background stripes (now blue and black) */}
+      <div className="absolute inset-0 bg-black/90 -skew-y-12 z-0"></div>
+      <div className="absolute top-0 left-0 w-full h-full grid grid-cols-4 gap-4 z-0">
+        {[...Array(4)].map((_, i) => (
+          <div
+            key={i}
+            className="bg-blue-600 transform -skew-y-12"
+            style={{ clipPath: "polygon(0 0, 100% 0, 100% 50%, 0% 50%)" }}
+          />
+        ))}
+      </div>
 
-        {/* Technical Skills */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold mb-8 text-foreground">Technical Skills</h3>
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 gap-6"
-            layout
+      {/* Content container */}
+      <motion.div
+        className="relative max-w-6xl w-full bg-black shadow-xl p-8 rounded-md text-gray-300 z-10"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible" // Animates when component enters viewport
+        viewport={{ once: true, amount: 0.2 }} // Only animate once, when 20% in view
+      >
+        <motion.h2
+          className="text-blue-400 text-3xl font-semibold text-center mb-4"
+          variants={headingVariants}
+        >
+          What I do
+        </motion.h2>
+        <motion.p
+          className="text-center max-w-3xl mx-auto mb-10 text-gray-400"
+          variants={textVariants}
+        >
+          I am from Sri Lanka and currently living in Jaffna.
+          I am pursuing a Bachelor’s degree in Computer Science and will graduate in 2027.
+          I am a Software Engineer and a passionate Cybersecurity enthusiast, currently working as a freelancer.
+        </motion.p>
+
+        <div className="flex flex-col lg:flex-row"> {/* Added flex-col for mobile, flex-row for larger screens */}
+          {/* Skills label vertical */}
+          <motion.div
+            className="flex flex-col justify-center items-center lg:items-start lg:mr-6 mb-6 lg:mb-0" // Centered for mobile
+            variants={itemVariants}
           >
-            {technicalSkills.map((skill, index) => (
+            <span className="text-white font-semibold tracking-wider transform lg:-rotate-90 lg:origin-left whitespace-nowrap mb-2 lg:mb-0">
+              Skills
+            </span>
+            <div className="w-1 bg-blue-400 rounded-full h-20 self-center lg:self-start"></div>
+          </motion.div>
+
+          {/* Skills grid */}
+          <motion.div
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 flex-1" // Responsive grid
+            variants={containerVariants} // Use container variants for stagger effect
+          >
+            {skills.map(({ name, imgSrc }) => (
               <motion.div
-                key={skill.name}
-                layout
-                initial={{ opacity: 0, scale: 0.8, z: 0 }}
-                whileInView={{ opacity: 1, scale: 1, z: 0 }}
-                viewport={{ once: true }}
-                transition={{ 
-                  delay: index * 0.1,
-                  type: 'spring',
-                  stiffness: 200,
-                  damping: 20
-                }}
-                whileHover={{ 
-                  scale: 1.1, 
-                  z: 50,
-                  rotateY: 5,
-                  rotateX: 5,
-                  transition: { duration: 0.2 }
-                }}
-                onHoverStart={() => setHoveredSkill(skill.name)}
-                onHoverEnd={() => setHoveredSkill(null)}
-                className="relative aspect-square rounded-3xl bg-card/60 backdrop-blur-xl border border-border/30 p-6 cursor-pointer"
-                style={{
-                  perspective: '1000px',
-                  transformStyle: 'preserve-3d',
-                  boxShadow: hoveredSkill === skill.name 
-                    ? 'inset 0 0 30px rgba(0, 191, 255, 0.3), 0 10px 40px rgba(0, 0, 0, 0.5)'
-                    : 'inset 0 0 10px rgba(0, 191, 255, 0.1)',
-                }}
+                key={name}
+                className="bg-[#111111] shadow-black shadow-lg rounded-md flex flex-col items-center p-6 cursor-pointer"
+                variants={skillCardVariants}
+                whileHover="hover" // Apply hover animation
               >
-                <div className="h-full flex flex-col items-center justify-center relative z-10">
-                  <h4 className="text-xl font-bold text-foreground mb-3">{skill.name}</h4>
-                  <div className="w-full h-2 bg-secondary/50 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      animate={{
-                        opacity: [0.7, 1, 0.7],
-                      }}
-                      transition={{ 
-                        delay: index * 0.1 + 0.3, 
-                        duration: 0.8,
-                        opacity: {
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
-                        }
-                      }}
-                      className="h-full rounded-full"
-                      style={{
-                        background: 'linear-gradient(90deg, hsl(var(--accent)), hsl(var(--neon-blue-glow)))',
-                        boxShadow: '0 0 10px hsl(var(--neon-blue) / 0.5)',
-                      }}
-                    />
-                  </div>
-                </div>
+                <img
+                  src={imgSrc}
+                  alt={name}
+                  className="w-16 h-16 object-contain mb-4"
+                />
+                <span className="text-sm font-semibold tracking-wide">{name}</span>
               </motion.div>
             ))}
           </motion.div>
         </div>
 
-        {/* Soft Skills */}
-        <div>
-          <h3 className="text-2xl font-semibold mb-8 text-foreground">Soft Skills</h3>
-          <div className="flex flex-wrap gap-4 justify-center">
-            {softSkills.map((skill, index) => (
-              <motion.div
-                key={skill}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ 
-                  scale: 1.05,
-                  rotate: [0, -2, 2, 0],
-                  transition: { 
-                    rotate: { duration: 0.5, ease: 'easeInOut' }
-                  }
-                }}
-                className="px-6 py-3 rounded-full bg-secondary/40 backdrop-blur-sm border border-border/20 text-muted-foreground font-medium hover:text-foreground transition-colors"
-              >
-                {skill}
-              </motion.div>
-            ))}
-          </div>
+        {/* Vertical scroll lines on the right */}
+        <div className="hidden lg:flex absolute right-4 top-1/2 transform -translate-y-1/2 flex-col space-y-4 z-10">
+          {[3, 2, 1].map((num) => (
+            <motion.div
+              key={num}
+              className={`w-0.5 rounded-full ${
+                num === 3 ? "bg-blue-400 h-12" : "bg-gray-500 h-12"
+              }`}
+              initial={{ height: 0 }}
+              animate={{ height: 48 }} // Animate height
+              transition={{ delay: 1 + num * 0.2, duration: 0.5 }}
+            />
+          ))}
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </div>
   );
 };
+
+export default Skills;

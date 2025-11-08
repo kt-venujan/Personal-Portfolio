@@ -1,12 +1,32 @@
-import { motion } from 'framer-motion';
-import digitalSigil from '@/assets/digital-sigil.png';
+import { motion, Variants } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
+import profilePhoto from '@/assets/profile-photo-bw.jpg';
 import { GlassCard } from './GlassCard';
 
-export const Hero = () => {
+// --- Framer Motion Variants ---
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.4 },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 200, damping: 20 },
+  },
+};
+
+export const Hero: React.FC = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-4">
-      <div className="max-w-5xl mx-auto text-center">
-        {/* Animated Digital Sigil */}
+    <section id="home" className="scroll-mt-24 min-h-screen flex items-center py-20">
+      <div className="max-w-5xl mx-auto text-center z-10 w-full px-4">
+
+        {/* 1️⃣ Animated Profile Avatar */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -16,138 +36,87 @@ export const Hero = () => {
             damping: 20,
             delay: 0.2,
           }}
-          className="mb-12 flex justify-center"
+          className="mb-12 flex justify-center mt-16"
         >
           <div className="relative">
             <motion.img
-              src={digitalSigil}
-              alt="Digital Sigil"
-              className="w-48 h-48 md:w-64 md:h-64 animate-pulse-glow"
-              animate={{
-                rotate: 360,
-              }}
-              transition={{
-                duration: 40,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
+              src={profilePhoto}
+              alt="Venujan Profile Avatar"
+              className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full border-4 border-border/20 
+                         transition-all duration-300 ease-in-out"
             />
-            {/* Pulsing ring effect */}
+            {/* Pulsing Neon Ring */}
             <motion.div
               className="absolute inset-0 rounded-full"
               animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 0, 0.5],
+                scale: [1, 1.25, 1],
+                opacity: [0.6, 0, 0.6],
               }}
               transition={{
-                duration: 3,
+                duration: 3.5,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
               style={{
-                border: '2px solid hsl(var(--neon-blue))',
-                boxShadow: '0 0 20px hsl(var(--neon-blue) / 0.5)',
+                border: '4px solid hsl(var(--neon-blue))',
+                boxShadow: '0 0 40px hsl(var(--neon-blue) / 0.7)',
               }}
             />
           </div>
         </motion.div>
 
-        {/* Hero Text */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            type: 'spring',
-            stiffness: 260,
-            damping: 20,
-            delay: 0.4,
-          }}
-        >
-          <GlassCard className="max-w-3xl mx-auto">
+        {/* 2️⃣ Hero Text with Typing Animation */}
+        <motion.div variants={containerVariants} initial="hidden" animate="visible">
+          <GlassCard className="max-w-3xl mx-auto mb-8">
             <motion.div
-              initial={{ scale: 0.98 }}
-              animate={{ scale: 1.02 }}
-              transition={{ 
-                delay: 0.6,
-                type: 'spring',
-                stiffness: 200,
-                damping: 15
-              }}
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 1.0, type: 'spring', stiffness: 150, damping: 10 }}
             >
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: 0.4,
-                  type: 'spring',
-                  stiffness: 200,
-                  damping: 20
-                }}
-                className="text-5xl md:text-7xl font-bold mb-4 text-foreground"
-              >
-                Hi, I'm{' '}
-                <span
-                  className="relative inline-block"
-                  style={{
-                    background: 'linear-gradient(90deg, hsl(var(--foreground)), hsl(var(--accent)))',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  Venujan
-                </span>
+              {/* ✨ Typing Text Animation */}
+              <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-bold mb-4 text-foreground">
+                <TypeAnimation
+                  sequence={[
+                    "Hi, I'm ",
+                    500,
+                    "Hi, I'm Venujan 👋",
+                    2000,
+                    "A React & AI Engineer",
+                    2000,
+                    "A Cybersecurity Enthusiast",
+                    2000,
+                  ]}
+                  speed={50}
+                  repeat={Infinity}
+                  wrapper="span"
+                  className="neon-text-gradient"
+                />
               </motion.h1>
-              
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: 0.6,
-                  type: 'spring',
-                  stiffness: 200,
-                  damping: 20
-                }}
-                className="text-2xl md:text-3xl font-semibold text-foreground/90 mb-3"
-              >
-                Passionate Developer
-              </motion.p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: 0.8,
-                  type: 'spring',
-                  stiffness: 200,
-                  damping: 20
-                }}
-                className="text-lg md:text-xl text-muted-foreground"
-              >
-                Turning ideas into interactive web apps 🚀
+              {/* Value Proposition */}
+              <motion.p variants={itemVariants} className="text-lg md:text-xl text-muted-foreground mt-2">
+                Never stop learning, because life never stops teaching.
               </motion.p>
             </motion.div>
           </GlassCard>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="flex gap-4 justify-center"
-          >
+          {/* 3️⃣ Buttons */}
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 justify-center">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-full bg-primary text-primary-foreground font-medium hover:shadow-[0_0_20px_hsl(var(--accent)/0.5)] transition-shadow"
+              className="px-8 py-4 rounded-full bg-accent text-foreground font-medium hover:shadow-[0_0_25px_hsl(var(--neon-blue)/0.6)] transition-all duration-300"
             >
               View Projects
             </motion.button>
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-full bg-card/60 backdrop-blur-xl border border-border/30 text-foreground font-medium hover:bg-card/80 transition-colors"
+              className="px-8 py-4 rounded-full bg-card/60 backdrop-blur-xl border border-border/30 text-foreground font-medium 
+                         hover:bg-card/80 hover:border-border/50 transition-all duration-300"
               style={{
-                boxShadow: 'inset 0 0 10px rgba(0, 191, 255, 0.1)',
+                boxShadow: 'inset 0 0 15px hsl(var(--neon-blue) / 0.2)',
               }}
             >
               Get in Touch
