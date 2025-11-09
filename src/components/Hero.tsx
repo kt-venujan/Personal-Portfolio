@@ -2,8 +2,6 @@ import { motion, Variants } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import profilePhoto from '@/assets/profile-photo-bw.jpg';
 import { GlassCard } from './GlassCard';
-
-// ✨ NEW: Import your favorite icons
 import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from 'react-icons/fa6';
 
 // --- Framer Motion Variants ---
@@ -24,54 +22,57 @@ const itemVariants: Variants = {
   },
 };
 
-// ✨ NEW: Define your social links (cleaner to keep outside the render)
+// --- Social Links ---
 const socialLinks = [
   {
     icon: <FaGithub />,
-    href: 'https://github.com/kt-venujan', // 👈 Change this
+    href: 'https://github.com/kt-venujan',
     label: 'GitHub',
   },
   {
     icon: <FaLinkedin />,
-    href: 'https://linkedin.com/in/thirugnanam-venujan', // 👈 Change this
+    href: 'https://linkedin.com/in/thirugnanam-venujan',
     label: 'LinkedIn',
   },
   {
     icon: <FaXTwitter />,
-    href: 'https://twitter.com/thirugnanam-venujan', // 👈 Change this
+    href: 'https://twitter.com/thirugnanam-venujan',
     label: 'Twitter',
   },
   {
     icon: <FaEnvelope />,
-    href: 'mailto:venuthiru185@gmail.com', // 👈 Change this
+    href: 'mailto:venuthiru185@gmail.com',
     label: 'Email',
   },
 ];
 
 export const Hero: React.FC = () => {
   return (
-    <section id="home" className="scroll-mt-24 min-h-screen flex items-center py-20">
+    // ✨ UPDATED: Removed 'items-center' and adjusted padding for more top space
+    <section id="home" className="scroll-mt-24 min-h-screen flex pt-28 pb-20 md:pt-32">
       <div className="max-w-5xl mx-auto text-center z-10 w-full px-4">
         
         {/* 1️⃣ Animated Profile Avatar */}
         <motion.div
-          initial={{ y: -50, opacity: 0, scale: 0.9 }} // ✨ UPDATED: Slightly higher start, subtle scale
-          animate={{ y: 0, opacity: 1, scale: 1 }}     // ✨ UPDATED: Animate to original position and scale
+          initial={{ y: -50, opacity: 0, scale: 0.9 }} 
+          animate={{ y: 0, opacity: 1, scale: 1 }}     
           transition={{
             type: 'spring',
-            stiffness: 200, // Slightly less stiff for a smoother feel
-            damping: 25,    // More damping for less bounce
-            delay: 0.3,     // Slightly adjusted delay
-            duration: 0.8,  // Add explicit duration for a controlled feel
-            ease: "easeOut", // Use easeOut for a smooth deceleration
+            stiffness: 200, 
+            damping: 25,    
+            delay: 0.3,     
+            duration: 0.8,  
+            ease: "easeOut", 
           }}
-          className="mb-12 flex justify-center mt-8 md:mt-12" // ✨ UPDATED: Reduced margin-top (mt-16 to mt-8/mt-12)
+          // ✨ UPDATED: Removed all 'mt-' (margin-top) to move it higher
+          className="mb-12 flex justify-center" 
         >
           <div className="relative">
             <motion.img
               src={profilePhoto}
               alt="Venujan Profile Avatar"
-              className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full border-4 border-border/20 
+              // ✨ UPDATED: Reduced avatar size for better mobile fit
+              className="w-40 h-40 md:w-56 md:h-56 object-cover rounded-full border-4 border-border/20 
                          transition-all duration-300 ease-in-out"
             />
             {/* Pulsing Neon Ring */}
@@ -103,7 +104,8 @@ export const Hero: React.FC = () => {
               transition={{ delay: 1.0, type: 'spring', stiffness: 150, damping: 10 }}
             >
               {/* ✨ Typing Text Animation */}
-              <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-bold mb-4 text-foreground">
+              {/* ✨ UPDATED: Made h1 font size responsive for mobile */}
+              <motion.h1 variants={itemVariants} className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 text-foreground">
                 <TypeAnimation
                   sequence={[
                     "Hi, I'm ",
@@ -123,7 +125,8 @@ export const Hero: React.FC = () => {
               </motion.h1>
 
               {/* Value Proposition */}
-              <motion.p variants={itemVariants} className="text-lg md:text-xl text-muted-foreground mt-2">
+              {/* ✨ UPDATED: Made subtitle font size responsive for mobile */}
+              <motion.p variants={itemVariants} className="text-base sm:text-lg md:text-xl text-muted-foreground mt-2">
                 Never stop learning, because life never stops teaching.
               </motion.p>
             </motion.div>
@@ -154,7 +157,7 @@ export const Hero: React.FC = () => {
             </motion.a>
           </motion.div>
 
-          {/* ✨ 4️⃣ NEW: ANIMATED SOCIAL LINKS ✨ */}
+          {/* 4️⃣ ANIMATED SOCIAL LINKS */}
           <motion.div
             variants={itemVariants} 
             className="flex gap-6 justify-center mt-10" 
