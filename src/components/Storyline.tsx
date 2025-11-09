@@ -202,8 +202,8 @@ const PortfolioStoryline: React.FC = () => {
                   <span className="absolute -top-4 -right-2 text-8xl font-bold text-foreground/10 -z-10">3</span>
                   <h3 className="font-bold text-xl text-foreground mb-1">Relevant Projects</h3>
                   <ul className="text-muted-foreground list-none space-y-1">
-                    <li>FIXORA – Workers Connecting Platform</li>
-                    <li>AncientVerse – Old Civilization Exploration</li>
+                    <li>FIXORA – Full Stack Web App</li>
+                    <li>Fasttrack – Delivery System</li>
                   </ul>
                 </GlassCard>
               </motion.div>

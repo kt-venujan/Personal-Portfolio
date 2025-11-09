@@ -16,7 +16,7 @@ const projects = [
 		title: 'Fixora - Full Stack',
 		description:
 			'A full-stack web platform connecting skilled workers like plumbers and electricians with clients, built by Team Elevate.',
-		tags: ['Laravel', 'Livewire', 'MySQL', 'TailwindCSS'],
+		tags: ['Laravel', 'React', 'MySQL', 'TailwindCSS'],
 		imageUrl: fixoraImg,
 		githubUrl: 'https://github.com/kt-venujan/Fixora-User',
 	},
@@ -24,7 +24,7 @@ const projects = [
 		title: 'Guess The Flag Game',
 		description:
 			'A fun Android app where users guess flags, track scores, and explore fun facts. Includes scoreboard, timer, and capital finder API.',
-		tags: ['Java', 'Android Studio', 'REST API', 'SQLite'],
+		tags: ['Java', 'Android Studio', 'REST API', 'Google SSO'],
 		imageUrl: guessFlagImg,
 		githubUrl: 'https://github.com/kt-venujan/flaggame',
 	},
@@ -82,7 +82,7 @@ export const Projects = () => {
 					className="text-center mb-16"
 				>
 					<h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-						Featured Projects 🚀
+						Featured Projects
 					</h2>
 					<p className="text-xl text-muted-foreground">
 						A showcase of my favorite creations and innovations 💡

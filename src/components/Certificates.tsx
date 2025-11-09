@@ -1,25 +1,42 @@
 import { motion, Variants } from 'framer-motion';
 import { GlassCard } from './GlassCard';
-import { Award } from 'lucide-react'; // ✨ ExternalLink import is GONE!
+import { Award } from 'lucide-react';
 
-// --- 1. Your Certificate Data (No Change) ---
+// --- 💎 1. Your Updated Certificate Data ---
 const certificates = [
   {
     id: 1,
     title: 'Certified in Cybersecurity (CC)',
     issuer: 'ISC²',
-    url: 'https://www.isc2.org/Certifications/CC', // (This URL is no longer used)
   },
   {
     id: 2,
     title: 'Cyber Threat Management',
     issuer: 'Cisco Networking Academy',
-    url: 'https://www.netacad.com/',
   },
-  // ... other certificates
+  {
+    id: 3,
+    title: 'Salesforce AI Associate',
+    issuer: 'Salesforce',
+  },
+  {
+    id: 4,
+    title: 'Introduction to Cybersecurity',
+    issuer: 'Cisco Networking Academy',
+  },
+  {
+    id: 5,
+    title: 'Google IT Support Fundamentals',
+    issuer: 'Google Career Certificates',
+  },
+  {
+    id: 6,
+    title: 'Networking Basics',
+    issuer: 'Cisco Networking Academy',
+  },
 ];
 
-// --- 2. Animation Variants (No Change) ---
+// --- 2. Animation Variants (Same as before) ---
 const gridParentVariant: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -43,17 +60,13 @@ const certCardVariant: Variants = {
   },
 };
 
-// --- ✨ 3. HELPER COMPONENT REMOVED ---
-// We don't need the helper component anymore, 
-// so I've put the code back inside the main component.
-
-// --- 4. The Main Component (Now Simplified) ---
+// --- 3. The Main Certificates Component ---
 export const Certificates = () => {
   return (
     <section className="py-20 px-4 bg-secondary/30">
       <div className="max-w-7xl mx-auto">
         
-        {/* --- Section Header (No Change) --- */}
+        {/* --- Header --- */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +77,7 @@ export const Certificates = () => {
           Certificates & Badges
         </motion.h2>
 
-        {/* --- Certificates Grid --- */}
+        {/* --- Grid --- */}
         <motion.div
           variants={gridParentVariant}
           initial="hidden"
@@ -72,10 +85,6 @@ export const Certificates = () => {
           viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {/* ✨ --- SIMPLIFIED LOOP --- ✨
-              No more 'a' tags or link checks. 
-              Every single card is now a 'motion.div'.
-          */}
           {certificates.map((cert) => (
             <motion.div
               key={cert.id}
@@ -83,20 +92,17 @@ export const Certificates = () => {
               whileHover="hover"
               className="h-full"
             >
-              {/* We just render the card content directly! */}
               <GlassCard className="h-full p-6 flex flex-col group transition-transform duration-300 relative">
-                
-                {/* --- ✨ ExternalLink icon is GONE! --- */}
-
-                {/* --- Icon (with hover animations) --- */}
                 <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-accent/20 text-accent mb-5 transition-all duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-12 group-hover:bg-accent/30">
                   <Award size={28} />
                 </div>
-
-                {/* --- Text Content --- */}
                 <div className="flex-grow">
-                  <h4 className="text-xl font-semibold text-foreground mb-2">{cert.title}</h4>
-                  <p className="text-muted-foreground text-sm">{cert.issuer}</p>
+                  <h4 className="text-xl font-semibold text-foreground mb-2">
+                    {cert.title}
+                  </h4>
+                  <p className="text-muted-foreground text-sm">
+                    {cert.issuer}
+                  </p>
                 </div>
               </GlassCard>
             </motion.div>
