@@ -1,11 +1,8 @@
 import { motion } from 'framer-motion';
-// ✨ FIXED: Importing the named export
-import { GlassCard } from './GlassCard';
 import { useState } from 'react';
-// ✨ UPDATED: Removed 'Award' icon as it's no longer needed
-import { Mail, Github, Linkedin } from 'lucide-react';
-
-// ✨ REMOVED: The 'certifications' array is now gone.
+import emailjs from 'emailjs-com'; // ✨ Add this package
+import { GlassCard } from './GlassCard';
+import { Mail, Github, Linkedin, CheckCircle2, XCircle } from 'lucide-react';
 
 const socialLinks = [
   { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/in/thirugnanam-venujan' },
@@ -13,10 +10,39 @@ const socialLinks = [
   { name: 'Email', icon: Mail, url: 'mailto:venuthiru185@gmail.com' },
 ];
 
-// ✨ REMOVED: The 'listParentVariants' and 'listItemVariants' are also gone.
-
 export const AchievementsContact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState(null); // success or error
+
+  const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const name = formData.name.trim();
+  const email = formData.email.trim();
+  const message = formData.message.trim();
+  const title = "Portfolio Contact"; // Or get dynamically
+
+  if (!name || !email || !message) {
+    alert("Please fill all fields!");
+    return;
+  }
+
+  emailjs.send(
+  "service_vajr6a7",    // Your Service ID
+  "template_tp5j40v",    // Your Template ID
+  {
+    name: formData.name.trim(),     // {{name}}
+    email: formData.email.trim(),   // {{email}}
+    message: formData.message.trim(), // {{message}}
+    title: "Portfolio Contact"      // {{title}} for subject
+  },
+  "Ykt6d70c9cOPi-YC6"          // Your Public Key
+)
+.then(() => alert("Message sent successfully! 🚀"))
+.catch((err) => console.error("EmailJS error:", err));
+
+
+  };
 
   return (
     <section id="contact" className="min-h-screen py-20 px-4 scroll-mt-24">
@@ -27,27 +53,21 @@ export const AchievementsContact = () => {
           viewport={{ once: true }}
           className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground"
         >
-          {/* ✨ UPDATED: Title changed */}
-          Get In Touch
+          Let’s Connect 🌐
         </motion.h2>
 
-        {/* ✨ UPDATED: Grid layout removed, centered the form directly */}
         <div className="flex justify-center">
-          
-          {/* ✨ REMOVED: Column 1 (Achievements) is gone. */}
-
-          {/* ✨ UPDATED: Contact Form is now centered */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
-            // ✨ This centers the card perfectly
-            className="w-full max-w-lg" 
+            className="w-full max-w-lg"
           >
             <GlassCard>
-              <h3 className="text-3xl font-bold mb-8 text-foreground text-center">Contact Me 💬</h3>
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <h3 className="text-3xl font-bold mb-8 text-center">Contact Me 💬</h3>
+
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <motion.input
                   type="text"
                   placeholder="Your Name"
@@ -82,8 +102,30 @@ export const AchievementsContact = () => {
                 </motion.button>
               </form>
 
-              {/* Social Links */}
-              <div className="flex justify-center gap-4 mt-8">
+              {/* ✅ Animated Status Feedback */}
+              <div className="mt-6 text-center">
+                {status === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center justify-center gap-2 text-green-500"
+                  >
+                    <CheckCircle2 className="w-5 h-5" /> Message sent successfully!
+                  </motion.div>
+                )}
+                {status === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center justify-center gap-2 text-red-500"
+                  >
+                    <XCircle className="w-5 h-5" /> Please fill all fields or try again.
+                  </motion.div>
+                )}
+              </div>
+
+              {/* 🌐 Social Links */}
+              <div className="flex justify-center gap-4 mt-10">
                 {socialLinks.map((link, index) => (
                   <motion.a
                     key={link.name}
@@ -106,7 +148,6 @@ export const AchievementsContact = () => {
               </div>
             </GlassCard>
           </motion.div>
-          
         </div>
       </div>
     </section>
