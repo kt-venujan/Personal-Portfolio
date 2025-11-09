@@ -3,7 +3,7 @@ import { GlassCard } from './GlassCard';
 import { useRef } from 'react';
 import { School, Star } from 'lucide-react'; // ✨ UPDATED: Removed 'Award' icon
 
-const skills = ['UI Design', 'Java', 'Real-World Solutions'];
+const skills = ['Leadership', 'Adaptable', 'Time Managment','Communication'];
 
 // --- (Variants are unchanged) ---
 const cardParentVariants: Variants = {

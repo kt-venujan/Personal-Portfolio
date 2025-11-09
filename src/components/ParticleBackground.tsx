@@ -1,5 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 
+// --- Use CDN URLs for icons ---
+const iconPaths = [
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+];
+
 interface Particle {
   x: number;
   y: number;
@@ -7,78 +18,89 @@ interface Particle {
   speedX: number;
   speedY: number;
   opacity: number;
+  icon: HTMLImageElement;
 }
 
-// We'll track the mouse position using a ref to avoid re-renders
+// Mouse position tracking
 const mouse = {
   x: null as number | null,
   y: null as number | null,
-  radius: 100, // Area of effect for mouse interaction
+  radius: 100,
 };
 
 export const ParticleBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
-  // We'll store request ID to cancel it on unmount
-  const animationFrameId = useRef<number | null>(null); 
+  const animationFrameId = useRef<number | null>(null);
   const particles = useRef<Particle[]>([]);
+  const loadedIcons = useRef<HTMLImageElement[]>([]);
 
-  // This function initializes or re-initializes particles
   const initParticles = (canvas: HTMLCanvasElement) => {
     particles.current = [];
-    const particleCount = canvas.width > 768 ? 50 : 25; // Fewer particles on mobile
+    const particleCount = canvas.width > 768 ? 40 : 20;
+
+    if (!loadedIcons.current || loadedIcons.current.length === 0) {
+      console.error('Icons are not loaded yet!');
+      return;
+    }
 
     for (let i = 0; i < particleCount; i++) {
+      const randomIcon = loadedIcons.current[
+        Math.floor(Math.random() * loadedIcons.current.length)
+      ];
+
       particles.current.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1,
+        size: Math.random() * 15 + 10,
         speedX: (Math.random() - 0.5) * 0.3,
         speedY: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.5 + 0.2,
+        opacity: Math.random() * 0.5 + 0.5,
+        icon: randomIcon,
       });
     }
   };
 
-  // The main animation loop
   const animate = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.current.forEach((particle, i) => {
-      // 1. Update particle position
+      // Update position
       particle.x += particle.speedX;
       particle.y += particle.speedY;
 
-      // 2. Handle wall bouncing
+      // Wall bouncing
       if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
       if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
 
-      // 3. Draw the particle
-      // Optimization: Set shadow *once* outside the loop
-      ctx.beginPath();
-      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(238, 238, 238, ${particle.opacity})`;
-      ctx.fill();
+      // Draw icon
+      ctx.globalAlpha = particle.opacity;
+      ctx.drawImage(
+        particle.icon,
+        particle.x - particle.size / 2,
+        particle.y - particle.size / 2,
+        particle.size,
+        particle.size
+      );
+      ctx.globalAlpha = 1.0;
 
-      // 4. --- NEW: Draw lines to other particles ---
+      // Draw lines to other particles
       for (let j = i + 1; j < particles.current.length; j++) {
         const otherParticle = particles.current[j];
         const dx = particle.x - otherParticle.x;
         const dy = particle.y - otherParticle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 150) { // Max distance to draw a line
+        if (distance < 150) {
           ctx.beginPath();
           ctx.moveTo(particle.x, particle.y);
           ctx.lineTo(otherParticle.x, otherParticle.y);
-          // Line opacity based on distance
           ctx.strokeStyle = `rgba(0, 191, 255, ${1 - distance / 150})`;
           ctx.lineWidth = 0.2;
           ctx.stroke();
         }
       }
 
-      // 5. --- NEW: Draw line to mouse ---
+      // Draw line to mouse
       if (mouse.x !== null && mouse.y !== null) {
         const dx = particle.x - mouse.x;
         const dy = particle.y - mouse.y;
@@ -89,7 +111,7 @@ export const ParticleBackground: React.FC = () => {
           ctx.moveTo(particle.x, particle.y);
           ctx.lineTo(mouse.x, mouse.y);
           ctx.strokeStyle = `rgba(0, 191, 255, ${1 - distance / mouse.radius})`;
-          ctx.lineWidth = 0.5; // Make mouse line slightly thicker
+          ctx.lineWidth = 0.5;
           ctx.stroke();
         }
       }
@@ -105,43 +127,75 @@ export const ParticleBackground: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas size and initialize particles
-    const setCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initParticles(canvas); // Re-create particles on resize
+    // Load images from CDN URLs
+    const loadImages = () => {
+      const imagePromises = iconPaths.map((url) => {
+        return new Promise<HTMLImageElement>((resolve, reject) => {
+          const img = new Image();
+          img.crossOrigin = 'anonymous'; // Enable CORS for external images
+          img.src = url;
+          img.onload = () => resolve(img);
+          img.onerror = (err) => {
+            console.error(`Failed to load icon from ${url}`, err);
+            reject(err);
+          };
+        });
+      });
+
+      return Promise.all(imagePromises);
     };
-    setCanvasSize();
 
-    // --- NEW: Mouse Move Listener ---
-    const handleMouseMove = (event: MouseEvent) => {
-      mouse.x = event.x;
-      mouse.y = event.y;
+    // Setup after images load
+    const setup = (loadedImageElements: HTMLImageElement[]) => {
+      loadedIcons.current = loadedImageElements;
+
+      const setCanvasSize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initParticles(canvas);
+      };
+      setCanvasSize();
+
+      const handleMouseMove = (event: MouseEvent) => {
+        mouse.x = event.x;
+        mouse.y = event.y;
+      };
+      const handleMouseLeave = () => {
+        mouse.x = null;
+        mouse.y = null;
+      };
+
+      window.addEventListener('resize', setCanvasSize);
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseleave', handleMouseLeave);
+
+      ctx.shadowBlur = 30;
+      ctx.shadowColor = 'rgba(0, 191, 255, 0.7)';
+
+      animate(ctx, canvas);
+
+      return () => {
+        window.removeEventListener('resize', setCanvasSize);
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseleave', handleMouseLeave);
+        if (animationFrameId.current) {
+          cancelAnimationFrame(animationFrameId.current);
+        }
+      };
     };
-    const handleMouseLeave = () => {
-      mouse.x = null;
-      mouse.y = null;
-    };
 
-    window.addEventListener('resize', setCanvasSize);
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
+    let cleanup: (() => void) | undefined;
 
-    // --- Optimization: Set shadow properties once ---
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = 'rgba(0, 191, 255, 0.3)';
+    loadImages()
+      .then((loadedImageElements) => {
+        cleanup = setup(loadedImageElements);
+      })
+      .catch((err) => {
+        console.error('Failed to load images for canvas:', err);
+      });
 
-    // Start animation
-    animate(ctx, canvas);
-
-    // Cleanup
     return () => {
-      window.removeEventListener('resize', setCanvasSize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
+      if (cleanup) cleanup();
     };
   }, []);
 
@@ -149,7 +203,7 @@ export const ParticleBackground: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 -z-10 pointer-events-none"
-      style={{ background: 'transparent' }} // This canvas sits on top of your dark bg
+      style={{ background: 'transparent' }}
     />
   );
 };
