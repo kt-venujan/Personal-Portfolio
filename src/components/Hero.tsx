@@ -3,6 +3,9 @@ import { TypeAnimation } from 'react-type-animation';
 import profilePhoto from '@/assets/profile-photo-bw.jpg';
 import { GlassCard } from './GlassCard';
 
+// ✨ NEW: Import your favorite icons
+import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from 'react-icons/fa6';
+
 // --- Framer Motion Variants ---
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -21,11 +24,35 @@ const itemVariants: Variants = {
   },
 };
 
+// ✨ NEW: Define your social links (cleaner to keep outside the render)
+const socialLinks = [
+  {
+    icon: <FaGithub />,
+    href: 'https://github.com/kt-venujan', // 👈 Change this
+    label: 'GitHub',
+  },
+  {
+    icon: <FaLinkedin />,
+    href: 'https://linkedin.com/in/thirugnanam-venujan', // 👈 Change this
+    label: 'LinkedIn',
+  },
+  {
+    icon: <FaXTwitter />,
+    href: 'https://twitter.com/thirugnanam-venujan', // 👈 Change this
+    label: 'Twitter',
+  },
+  {
+    icon: <FaEnvelope />,
+    href: 'mailto:venuthiru185@gmail.com', // 👈 Change this
+    label: 'Email',
+  },
+];
+
 export const Hero: React.FC = () => {
   return (
     <section id="home" className="scroll-mt-24 min-h-screen flex items-center py-20">
       <div className="max-w-5xl mx-auto text-center z-10 w-full px-4">
-
+        
         {/* 1️⃣ Animated Profile Avatar */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
@@ -122,6 +149,40 @@ export const Hero: React.FC = () => {
               Get in Touch
             </motion.button>
           </motion.div>
+
+          {/* ✨ 4️⃣ NEW: ANIMATED SOCIAL LINKS ✨ */}
+          <motion.div
+            variants={itemVariants} // Animates in after the buttons (thanks to staggerChildren on the parent)
+            className="flex gap-6 justify-center mt-10" // Added margin-top for spacing
+          >
+            {socialLinks.map((link) => (
+              <motion.a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+                whileHover={{ scale: 1.15, y: -5 }} // Bounces up on hover
+                whileTap={{ scale: 0.9 }}
+                className="
+                  p-3 w-12 h-12 flex items-center justify-center rounded-full 
+                  bg-card/60 backdrop-blur-xl 
+                  border border-border/30 
+                  text-foreground text-xl 
+                  hover:bg-card/80 
+                  hover:border-border/50
+                  hover:shadow-[0_0_20px_hsl(var(--neon-blue)/0.5)]
+                  transition-all duration-300
+                "
+                style={{
+                  boxShadow: 'inset 0 0 10px hsl(var(--neon-blue) / 0.1)',
+                }}
+              >
+                {link.icon}
+              </motion.a>
+            ))}
+          </motion.div>
+
         </motion.div>
       </div>
     </section>

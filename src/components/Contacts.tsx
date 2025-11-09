@@ -9,8 +9,8 @@ import { Mail, Github, Linkedin } from 'lucide-react';
 
 const socialLinks = [
   { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/in/thirugnanam-venujan' },
-  { name: 'GitHub', icon: Github, url: 'https://github.com/HackerVenu' },
-  { name: 'Email', icon: Mail, url: 'mailto:venujanofficial@gmail.com' },
+  { name: 'GitHub', icon: Github, url: 'https://github.com/kt-venujan' },
+  { name: 'Email', icon: Mail, url: 'mailto:venuthiru185@gmail.com' },
 ];
 
 // ✨ REMOVED: The 'listParentVariants' and 'listItemVariants' are also gone.
