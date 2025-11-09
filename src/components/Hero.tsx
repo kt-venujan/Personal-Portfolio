@@ -55,15 +55,17 @@ export const Hero: React.FC = () => {
         
         {/* 1️⃣ Animated Profile Avatar */}
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          initial={{ y: -50, opacity: 0, scale: 0.9 }} // ✨ UPDATED: Slightly higher start, subtle scale
+          animate={{ y: 0, opacity: 1, scale: 1 }}     // ✨ UPDATED: Animate to original position and scale
           transition={{
             type: 'spring',
-            stiffness: 260,
-            damping: 20,
-            delay: 0.2,
+            stiffness: 200, // Slightly less stiff for a smoother feel
+            damping: 25,    // More damping for less bounce
+            delay: 0.3,     // Slightly adjusted delay
+            duration: 0.8,  // Add explicit duration for a controlled feel
+            ease: "easeOut", // Use easeOut for a smooth deceleration
           }}
-          className="mb-12 flex justify-center mt-16"
+          className="mb-12 flex justify-center mt-8 md:mt-12" // ✨ UPDATED: Reduced margin-top (mt-16 to mt-8/mt-12)
         >
           <div className="relative">
             <motion.img
@@ -129,31 +131,33 @@ export const Hero: React.FC = () => {
 
           {/* 3️⃣ Buttons */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 justify-center">
-            <motion.button
+            {/* View Projects -> #projects */}
+            <motion.a
+              href="#projects"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 rounded-full bg-accent text-foreground font-medium hover:shadow-[0_0_25px_hsl(var(--neon-blue)/0.6)] transition-all duration-300"
             >
               View Projects
-            </motion.button>
+            </motion.a>
 
-            <motion.button
+            {/* Get in Touch -> #contact */}
+            <motion.a
+              href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 rounded-full bg-card/60 backdrop-blur-xl border border-border/30 text-foreground font-medium 
                          hover:bg-card/80 hover:border-border/50 transition-all duration-300"
-              style={{
-                boxShadow: 'inset 0 0 15px hsl(var(--neon-blue) / 0.2)',
-              }}
+              style={{ boxShadow: 'inset 0 0 15px hsl(var(--neon-blue) / 0.2)' }}
             >
               Get in Touch
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* ✨ 4️⃣ NEW: ANIMATED SOCIAL LINKS ✨ */}
           <motion.div
-            variants={itemVariants} // Animates in after the buttons (thanks to staggerChildren on the parent)
-            className="flex gap-6 justify-center mt-10" // Added margin-top for spacing
+            variants={itemVariants} 
+            className="flex gap-6 justify-center mt-10" 
           >
             {socialLinks.map((link) => (
               <motion.a
@@ -162,7 +166,7 @@ export const Hero: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
-                whileHover={{ scale: 1.15, y: -5 }} // Bounces up on hover
+                whileHover={{ scale: 1.15, y: -5 }} 
                 whileTap={{ scale: 0.9 }}
                 className="
                   p-3 w-12 h-12 flex items-center justify-center rounded-full 
