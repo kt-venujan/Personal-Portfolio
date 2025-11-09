@@ -147,7 +147,7 @@ const journeyData: JourneyItem[] = [
 
     detailedDescription: [
 
-      'Interview success hinges on more than just answers—it’s about presence, preparation, and perception. We dissected the entire interview lifecycle, from researching company culture to sending a thoughtful follow-up.',
+      'Interview success hinges on more than just answers, it’s about presence, preparation, and perception. We dissected the entire interview lifecycle, from researching company culture to sending a thoughtful follow-up.',
 
       'Practical interview preparation through mock sessions. We practiced common interview questions and received feedback on performance.',
 

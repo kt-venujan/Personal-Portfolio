@@ -2,7 +2,7 @@ import { motion, Variants } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import profilePhoto from '@/assets/profile-photo-bw.jpg';
 import { GlassCard } from './GlassCard';
-import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from 'react-icons/fa6';
+import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope, FaDownload } from 'react-icons/fa6';
 
 // --- Framer Motion Variants ---
 const containerVariants: Variants = {
@@ -134,7 +134,6 @@ export const Hero: React.FC = () => {
 
           {/* 3️⃣ Buttons */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 justify-center">
-            {/* View Projects -> #projects */}
             <motion.a
               href="#projects"
               whileHover={{ scale: 1.05 }}
@@ -143,8 +142,6 @@ export const Hero: React.FC = () => {
             >
               View Projects
             </motion.a>
-
-            {/* Get in Touch -> #contact */}
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.05 }}
@@ -154,6 +151,19 @@ export const Hero: React.FC = () => {
               style={{ boxShadow: 'inset 0 0 15px hsl(var(--neon-blue) / 0.2)' }}
             >
               Get in Touch
+            </motion.a>
+            {/* Download CV */}
+            <motion.a
+              href="/cv.pdf"
+              download
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 rounded-full bg-foreground text-background font-medium 
+                         hover:bg-accent hover:text-foreground transition-all duration-300
+                         flex items-center gap-2"
+            >
+              <FaDownload className="text-xl" />
+              Download CV
             </motion.a>
           </motion.div>
 
