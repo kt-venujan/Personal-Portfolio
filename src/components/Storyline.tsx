@@ -141,8 +141,10 @@ const PortfolioStoryline: React.FC = () => {
                 <motion.div variants={itemVariants} transition={{ delay: 1.9 }} className="absolute max-w-[280px] text-right leading-relaxed" style={{ top: '90px', right: '0' }}>
                   <h3 className="font-bold text-lg text-foreground mb-1">Relevant Projects</h3>
                   <ul className="text-sm text-muted-foreground list-none space-y-1">
-                    <li>FIXORA – Workers Connecting Platform</li>
-                    <li>AncientVerse – Old Civilization Exploration</li>
+                    <li>Full Stack Web Apps</li>
+                    <li>Delivery Systems</li>
+                    <li>AI Projects</li>
+
                   </ul>
                 </motion.div>
               </motion.div>
