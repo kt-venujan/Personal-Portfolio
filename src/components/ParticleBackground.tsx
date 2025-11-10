@@ -9,6 +9,8 @@ const iconPaths = [
   'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
   'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
   'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+  'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
 ];
 
 interface Particle {
@@ -36,7 +38,7 @@ export const ParticleBackground: React.FC = () => {
 
   const initParticles = (canvas: HTMLCanvasElement) => {
     particles.current = [];
-    const particleCount = canvas.width > 768 ? 40 : 20;
+    const particleCount = canvas.width > 768 ? 45 : 25;
 
     if (!loadedIcons.current || loadedIcons.current.length === 0) {
       console.error('Icons are not loaded yet!');
@@ -51,10 +53,10 @@ export const ParticleBackground: React.FC = () => {
       particles.current.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 15 + 10,
+        size: Math.random() * 25 + 20,
         speedX: (Math.random() - 0.5) * 0.3,
         speedY: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.5 + 0.5,
+        opacity: Math.random() * 0.4 + 0.6,
         icon: randomIcon,
       });
     }
@@ -72,6 +74,10 @@ export const ParticleBackground: React.FC = () => {
       if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
       if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
 
+      // Draw glow effect
+      ctx.shadowBlur = 50;
+      ctx.shadowColor = 'rgba(0, 191, 255, 0.8)';
+
       // Draw icon
       ctx.globalAlpha = particle.opacity;
       ctx.drawImage(
@@ -82,6 +88,7 @@ export const ParticleBackground: React.FC = () => {
         particle.size
       );
       ctx.globalAlpha = 1.0;
+      ctx.shadowBlur = 0;
 
       // Draw lines to other particles
       for (let j = i + 1; j < particles.current.length; j++) {
@@ -90,17 +97,20 @@ export const ParticleBackground: React.FC = () => {
         const dy = particle.y - otherParticle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 150) {
+        if (distance < 180) {
           ctx.beginPath();
           ctx.moveTo(particle.x, particle.y);
           ctx.lineTo(otherParticle.x, otherParticle.y);
-          ctx.strokeStyle = `rgba(0, 191, 255, ${1 - distance / 150})`;
-          ctx.lineWidth = 0.2;
+          ctx.strokeStyle = `rgba(0, 191, 255, ${1 - distance / 180})`;
+          ctx.lineWidth = 0.3;
+          ctx.shadowBlur = 15;
+          ctx.shadowColor = 'rgba(0, 191, 255, 0.5)';
           ctx.stroke();
+          ctx.shadowBlur = 0;
         }
       }
 
-      // Draw line to mouse
+      // Draw line to mouse with stronger glow
       if (mouse.x !== null && mouse.y !== null) {
         const dx = particle.x - mouse.x;
         const dy = particle.y - mouse.y;
@@ -110,9 +120,12 @@ export const ParticleBackground: React.FC = () => {
           ctx.beginPath();
           ctx.moveTo(particle.x, particle.y);
           ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(0, 191, 255, ${1 - distance / mouse.radius})`;
-          ctx.lineWidth = 0.5;
+          ctx.strokeStyle = `rgba(0, 255, 255, ${1 - distance / mouse.radius})`;
+          ctx.lineWidth = 0.8;
+          ctx.shadowBlur = 25;
+          ctx.shadowColor = 'rgba(0, 255, 255, 0.9)';
           ctx.stroke();
+          ctx.shadowBlur = 0;
         }
       }
     });
@@ -132,7 +145,7 @@ export const ParticleBackground: React.FC = () => {
       const imagePromises = iconPaths.map((url) => {
         return new Promise<HTMLImageElement>((resolve, reject) => {
           const img = new Image();
-          img.crossOrigin = 'anonymous'; // Enable CORS for external images
+          img.crossOrigin = 'anonymous';
           img.src = url;
           img.onload = () => resolve(img);
           img.onerror = (err) => {
@@ -169,9 +182,6 @@ export const ParticleBackground: React.FC = () => {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseleave', handleMouseLeave);
 
-      ctx.shadowBlur = 30;
-      ctx.shadowColor = 'rgba(0, 191, 255, 0.7)';
-
       animate(ctx, canvas);
 
       return () => {
@@ -202,8 +212,7 @@ export const ParticleBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 -z-10 pointer-events-none"
-      style={{ background: 'transparent' }}
+      className="fixed inset-0 -z-10 pointer-events-none bg-transparent"
     />
   );
 };

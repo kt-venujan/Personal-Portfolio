@@ -1,5 +1,10 @@
-import { motion } from 'framer-motion';
-import { ProjectCard } from './ProjectCard';
+import React, { lazy, Suspense, memo } from 'react';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
+
+// Lazy-load ProjectCard to split bundle
+const ProjectCard = lazy(() =>
+  import('./ProjectCard').then((m) => ({ default: m.ProjectCard }))
+);
 
 // Image imports
 import fixoraImg from '@/assets/projects/fixora.png';
@@ -10,7 +15,7 @@ import medicarePlusImg from '@/assets/projects/medicare.jpg';
 import aiStudyHelperImg from '@/assets/projects/legallense.webp';
 import studentMgmtImg from '@/assets/projects/student.png';
 
-// Project data
+// Project data (static, outside component for referential stability)
 const projects = [
 	{
 		title: 'Fixora - Full Stack',
@@ -45,14 +50,6 @@ const projects = [
 		githubUrl: 'https://github.com/kt-venujan/FastTrack_Pro',
 	},
 	{
-		title: 'MediCare Plus',
-		description:
-			'Healthcare management system automating patient records, doctor schedules, and pharmacy inventory for small clinics.',
-		tags: ['Java', 'Swing', 'MySQL', 'NetBeans'],
-		imageUrl: medicarePlusImg,
-		githubUrl: 'https://github.com/kt-venujan/OOP_Java_MediCare-Plus_Group-1',
-	},
-	{
 		title: 'AI Study Helper',
 		description:
 			'An AI-powered chatbot that helps students understand topics, generate summaries, and provide smart study recommendations.',
@@ -70,38 +67,56 @@ const projects = [
 	},
 ];
 
-export const Projects = () => {
+// Lightweight skeleton for suspense fallback
+const GridSkeleton = () => (
+	<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+		{Array.from({ length: 6 }).map((_, i) => (
+			<div
+				key={i}
+				className="h-72 rounded-xl border border-border/20 bg-secondary/30 animate-pulse"
+				aria-hidden="true"
+			/>
+		))}
+	</div>
+);
+
+export const Projects = memo(() => {
 	return (
 		<section id="projects" className="min-h-screen py-20 px-4 scroll-mt-24">
 			<div className="max-w-7xl mx-auto">
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6 }}
-					className="text-center mb-16"
-				>
-					<h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-						Featured Projects
-					</h2>
-					<p className="text-xl text-muted-foreground">
-						A showcase of my favorite creations and innovations 💡
-					</p>
-				</motion.div>
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{projects.map((project, index) => (
-						<ProjectCard
-							key={project.title}
-							title={project.title}
-							description={project.description}
-							tags={project.tags}
-							delay={index * 0.15}
-							imageUrl={project.imageUrl}
-							githubUrl={project.githubUrl}
-						/>
-					))}
-				</div>
+				<LazyMotion features={domAnimation}>
+					<m.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true, amount: 0.2 }}
+						transition={{ duration: 0.6 }}
+						className="text-center mb-16"
+					>
+						<h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+							Featured Projects
+						</h2>
+						<p className="text-xl text-muted-foreground">
+							A showcase of my favorite creations and innovations 💡
+						</p>
+					</m.div>
+				</LazyMotion>
+
+				<Suspense fallback={<GridSkeleton />}>
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+						{projects.map((project, index) => (
+							<ProjectCard
+								key={project.title}
+								title={project.title}
+								description={project.description}
+								tags={project.tags}
+								delay={index * 0.12}
+								imageUrl={project.imageUrl}
+								githubUrl={project.githubUrl}
+							/>
+						))}
+					</div>
+				</Suspense>
 			</div>
 		</section>
 	);
-};
+});

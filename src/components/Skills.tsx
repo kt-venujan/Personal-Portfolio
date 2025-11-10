@@ -11,20 +11,20 @@ const skills = [
     imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",
   },
   {
-    name: "SASS",
-    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg",
+  name: "LARAVEL",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg",
   },
   {
-    name: "JAVASCRIPT",
-    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
+    name: "DJANGO",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/django/django-plain.svg",
   },
   {
     name: "REACT JS",
     imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
   },
   {
-    name: "GITHUB",
-    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg",
+    name: "MYSQL",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg",
   },
   {
     name: "NODE JS",
@@ -39,8 +39,8 @@ const skills = [
     imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg",
   },
   {
-    name: "DOCKERS",
-    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg",
+    name: "JAVA",
+    imgSrc: "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",
   },
 ];
 
