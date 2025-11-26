@@ -14,27 +14,21 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 // --- (All your image imports are the same) ---
-import week1Img from '../assets/sessions/week1.jpg';
+import week1Img from '../assets/sessions/week1.jpeg';
 
-import week2Img from '../assets/sessions/week2.jpg';
+import week2Img from '../assets/sessions/week2.jpeg';
 
-import week3Img from '../assets/sessions/attidude.jpeg';
+import week3Img from '../assets/sessions/week3.jpeg';
 
-import week4Img from '../assets/sessions/cv.jpeg';
+import week4Img from '../assets/sessions/week4.jpeg';
 
-import week5Img from '../assets/sessions/interview.jpg';
+import week5Img from '../assets/sessions/week5.jpeg';
 
 import week6Img from '../assets/sessions/week6.jpeg';
 
-import week7Img from '../assets/sessions/week7.jpg';
+import week7Img from '../assets/sessions/week7.jpeg';
 
-import week8Img from '../assets/sessions/week8.jpg';
 
-import week9Img from '../assets/sessions/proposal.jpeg';
-
-import week11Img from '../assets/sessions/emotional.jpg';
-
-import week10Img from '../assets/sessions/Team leader.jpg';
 // --- (Your types and data are exactly the same) ---
 type JourneyItem = {
   id: number;
@@ -50,226 +44,111 @@ type JourneyItem = {
 
 // I've added 'detailedDescription' to every item
 
-const journeyData: JourneyItem[] = [
+// Don't forget to import your images at the top! 
+// import week1Img from './assets/week1.jpg'; (etc...)
 
+export const sessionData = [
   {
-
     id: 1,
-
-    title: 'Week 1 - Professional Skills',
-
-    description: 'Building foundational professional competencies for workplace success.',
-
-    imageUrl: week1Img,
-
+    title: 'Intro to Employability Skills',
+    description: 'The foundation: Why soft skills matter for your career.',
+    imageUrl: week1Img, // Make sure you have this variable imported
     detailedDescription: [
-
-      'This foundational module laid the groundwork for professional excellence by cultivating habits and mindsets critical in modern workplaces. We explored how soft skills often outweigh technical abilities in determining long-term career success.',
-
-      'This session introduces the fundamentals of professional skills essential for workplace success. We covered communication basics, workplace etiquette, and personal branding.',
-
-      'What I Plan to Implement in the Future Plan to apply active listening techniques in daily communications and maintain consistent professional standards in all interactions.'
-
+      'Resource Person: Ms. Vishaliney Pirathap (Lecturer, Northern Uni).',
+      'Topic: Introduction to Employability Skills Development (ESD).',
+      'Learned that soft skills + technical knowledge = The "Magic Combo" ✨.',
+      'Key takeaway: Self-reflection is crucial to identify where we need to improve.'
     ],
-
   },
-
   {
-
+    
     id: 2,
-
-    title: 'Week 2 - Employability Skills',
-
-    description: 'Developing essential skills that enhance job readiness.',
-
-    imageUrl: week2Img,
-
+    title: 'Company & Business Law',
+    description: 'The "Startup Survival Kit": Contracts, IP, and Legal Structures.',
+    imageUrl: week2Img, 
     detailedDescription: [
-
-      'This week focused on translating potential into real-world readiness. Through case studies and group simulations, Enhanced understanding of core employability skills valued by modern employers. Learned practical strategies for developing adaptability in changing work environment.'
-
-
+      'Resource Person: Ms. Vaishnavy Shanmuganathan (Attorney-at-Law).',
+      'Topic: Company Law & Business Law.',
+      'Core Lesson: Understanding business structures (Sole proprietorship vs. Corporation).',
+      'Key Insight: Intellectual Property (IP) rights are the "shield" for your ideas 🛡️.',
+      'Takeaway: Contracts and compliance are not optional—they are essential for success.',
+      'Future Plan: deepening legal literacy to protect future business endeavors.'
+    ],
+  },
+  {
+    id: 3,
+    title: 'Selecting a Career Path',
+    description: 'The roadmap from "Just Curious" to "Hired Developer".',
+    imageUrl: week3Img,
+    detailedDescription: [
+      'Resource Person: Mr. Gajarthan Thevarajah (CEO, Bohar Solutions).',
+      'The Golden Rule: "Start messy!" Don\'t wait for perfection—build with what you know.',
+      'Tech Stack: Git, HTML/CSS/JS, React, and UI/UX with Figma 🎨.',
+      'Mistakes to Avoid: Focusing only on theory and being too shy to share work publicly.',
+      'Action Plan: Build a personal site, push 10 commits to GitHub, and post weekly on LinkedIn.',
+      'Core Lesson: Resilience + Curiosity > Talent.'
     ],
 
   },
-
-  {
-
-    id: 3,
-
-    title: 'Week 3 - Value, Beliefs, Attitude & Character',
-
-    description: 'Understanding the core principles that drive professional conduct.',
-
-    imageUrl: week3Img,
-
-    detailedDescription: [
-
-      'This introspective module examined how personal ethics shape professional identity. We analyzed scenarios where values clash with organizational goals, and discussed strategies to uphold integrity without compromising collaboration.',
-
-      'Key outcomes :  strengthened moral reasoning, deeper self-awareness of personal values, practice in ethical decision-making frameworks, and the ability to align personal purpose with professional roles. We also explored how accountability, humility, and consistency in behavior build long-term trust and credibility in any career.'
-
-    ], 
-
-  },
-
   {
 
     id: 4,
-
-    title: 'Week 4 - CV Writing',
-
-    description: 'Crafting a compelling CV that gets noticed by recruiters.',
-
+    title: 'Non-IT Career Opportunities',
+    description: 'Expanding horizons: Entrepreneurship & Public Speaking.',
     imageUrl: week4Img,
-
     detailedDescription: [
-
-      'We transformed the CV from a chronological list into a strategic marketing tool. Through iterative drafting and peer feedback, we learned to highlight impact, not just responsibilities.',
-
-      'Focused on creating compelling CVs through structure, content optimization, and tailoring for specific job roles.',
-
-      'Learned to present experiences effectively and optimize CVs for applicant tracking systems.'
-
+      'Resource Person: Ms. Sarmila Sivaraja (CEO, 2SF Labs & Google WTM Ambassador).',
+      'Topic: Achieving your dream job & exploring Non-IT avenues.',
+      'The Toolkit: Toastmasters for speaking 🎤, Clubhouse for networking 🤝, and Coursera for skills.',
+      'Mindset Shift: Read "Rich Dad, Poor Dad" and prioritize knowledge sharing.',
+      'Core Lesson: Your tech skills can build businesses in non-tech fields (Entrepreneurship).',
+      'Action Plan: Join Toastmasters to fix communication gaps and explore startup ideas.'
     ],
-
   },
-
   {
-
+  
     id: 5,
-
-    title: 'Week 5 - Interview Manners',
-
-    description: 'Practical interview preparation.',
-
+    title: 'HR Expectations & Industry Attitudes',
+    description: 'Cracking the HR Code: Resumes, Interviews, & Corporate Culture.',
     imageUrl: week5Img,
-
     detailedDescription: [
-
-      'Interview success hinges on more than just answers, it’s about presence, preparation, and perception. We dissected the entire interview lifecycle, from researching company culture to sending a thoughtful follow-up.',
-
-      'Practical interview preparation through mock sessions. We practiced common interview questions and received feedback on performance.',
-
-      'Common Interview Questions, Behavioral Interview Techniques, Body Language and Presentation, Handling Difficult Questions'
+      'Resource Person: Mr. Mahinthan.',
+      'The Golden Quote: "HR is not a job, it is a practice." Treat people with respect 🤝.',
+      'Key Concept: Equity vs. Equality — Understanding that "Fairness" > "Sameness".',
+      'The Hiring Trinity: Tech Skills + Adaptability + English Proficiency = Job Offer ✅.',
+      'Interview Hacks: Punctuality, polished resumes, and understanding "Cultural Fit" are non-negotiable.',
+      'Corporate Survival: Navigating employment contracts, labor laws, and company policies.',
+      'Action Plan: Professionalize LinkedIn profile and master the art of writing Project Proposals.'
     ],
-
   },
-
   {
-
     id: 6,
-
-    title: 'Week 6 - Portfolio',
-
-    description: 'Building a personal portfolio to showcase skills and projects.',
-
-    imageUrl: week6Img,
-
+    title: 'Managing Stress & Work-Life Balance',
+    description: 'Mastering the art of staying cool under pressure.',
+    imageUrl: week6Img, 
     detailedDescription: [
-
-      'This hands-on week guided us in creating a living, digital showcase that communicates, Focused on creating and maintaining digital portfolios to showcase achievements',
-
-      'Portfolio Content Selection, Digital Portfolio Platforms, Visual Design Principles, Content Organization Strategies, Portfolio Maintenance'
-
+      'Resource Person: Mr. Kuga.',
+      'Topic: Managing Stress and Balancing Work-Life.',
+      'Key Takeaway: Mental health is the secret weapon for professional success 🧠.',
+      'Techniques: Mindfulness, taking breaks, and setting boundaries to avoid burnout.',
+      'Approach: A humorous and relatable session that made heavy topics easy to digest.',
+      'Future Goal: Using time management tools to work smarter, not harder.'
     ],
-
   },
-
   {
-
     id: 7,
-
-    title: 'Week 7 - Meeting and Speaking Skills',
-
-    description: 'Enhancing public speaking and effective meeting participation.',
-
+    title: 'UI/UX & Data Science Trends',
+    description: 'Modern tech roles and what the industry demands.',
     imageUrl: week7Img,
-
     detailedDescription: [
-
-      'Whether presenting to executives or contributing in a team huddle, clear communication drives results. We tackled anxiety through practice and structure, turning nervous energy into confident delivery.',
-
-      'Skills mastered: designing audience-centered presentations, sing vocal variety and pacing for emphasis, managing Q&A sessions gracefully, preparing concise meeting agendas, facilitating inclusive discussions, and taking effective meeting notes with clear action items. These tools ensure your voice adds value in any professional setting.'
-
+      'Resource Person: Mr. Ravichelvan Kanagasabapathy (Tech Lead, HCLTech).',
+      'Topic: Job Roles – UI/UX and Data Science.',
+      'Date: 14th August 2025.',
+      'Explored the high-demand fields of User Experience and Data Science in today’s market.'
     ],
-
   },
-
-  {
-
-    id: 8,
-
-    title: 'Week 8 - Email Writing Etiquettes',
-
-    description: 'Mastering professional email communication.',
-
-    imageUrl: week8Img,
-
-    detailedDescription: [
-
-      'In a world of digital overload, a well-crafted email cuts through noise and builds trust. We learned to write emails that are clear, respectful, and action oriented saving time for everyone involved.',
-
-      'Practiced - Email Structure and Formatting, Tone and Professionalism, Subject Line Best Practices, Response Timing and Etiquette, Cross Cultural Email Communication'
-
-    ],
-
-  },
-
-  {
-
-    id: 9,
-
-    title: 'Week 9 - Proposal Writing',
-
-    description: 'Learning to write persuasive proposals for projects or ideas.',
-
-    imageUrl: week9Img,
-
-    detailedDescription: [
-
-      'This module taught us to write proposals that convince stakeholders by balancing logic, feasibility, and vision.',
-
-      'We gained proficiency in defining clear problem statements, designing viable solutions with scope and constraints, estimating resources and timelines realistically, justifying ROI or impact, and using persuasive language without hype. Whether pitching a side project or a business initiative, this skill empowers you to lead change.'
-
-    ],
-
-  },
-
-  {
-  id: 10,
-
-  title: 'Week 10 - Team and Leadership',
-  description: 'Exploring dynamics of teamwork and fundamentals of leadership.',
-
-  imageUrl: week10Img,
-
-  detailedDescription: [
-
-    'Leadership isn’t about titles, it’s about influence, responsibility, and collaboration. During this session, we organized a fun and engaging role-play activity as a general meeting of the "Vettarak Club", where everyone took on different roles to simulate a real club environment.',
-    'The experience helped us understand how real meetings are conducted, how teamwork functions in structured groups, and how leadership naturally emerges through coordination, communication, and shared purpose. It clearly showed how leaders guide, motivate, and support others while maintaining group harmony.'
-  ],
-},
-
-
-  {
-  id: 11,
-
-  title: 'Week 11 - Emotional Intelligence',
-
-  description: 'Developing self-awareness and empathy in a professional context.',
-
-  imageUrl: week11Img,
-
-  detailedDescription: [
-    'High-performing professionals don’t just know their field, they understand people. This session emphasized Emotional Intelligence (EQ) as a vital skill for managing relationships and decision-making effectively.',
-    'We divided into groups, and my friend "Kavishan" and I created a real-life scenario where we acted out two scenes, first as friends, and then as a "manager and employee". The situation explored how I introduced a new idea that the manager initially rejected, testing how emotional intelligence guided my reactions and communication.',
-    'Through this activity, we learned how empathy, emotional control, and active listening help resolve conflict and maintain professionalism even in challenging situations.'
-  ],
-},
-
-
 ];
+
 
 // --- 4. The NEW Carousel Component ---
 export const MyJourneyInFrames: React.FC = () => {
@@ -282,7 +161,7 @@ export const MyJourneyInFrames: React.FC = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          Journey - Professional Skills Module
+          Weekly Learning Journey - Employability Skills Development
         </h2>
       </div>
 
@@ -307,7 +186,7 @@ export const MyJourneyInFrames: React.FC = () => {
         modules={[EffectCoverflow, Pagination, Navigation]}
         className="w-full py-12" // Add some padding for shadows
       >
-        {journeyData.map((item) => (
+        {sessionData.map((item) => (
           // Each slide is now a <SwiperSlide>
           <SwiperSlide 
             key={item.id} 
