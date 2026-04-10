@@ -7,13 +7,13 @@ const ProjectCard = lazy(() =>
 );
 
 // Image imports
-import fixoraImg from '@/assets/projects/fixora.png';
-import guessFlagImg from '@/assets/projects/guess-flag.jpg';
+import fixoraImg from '@/assets/projects/fixora.webp';
+import guessFlagImg from '@/assets/projects/guess-flag.webp';
 import fasttrackSwingImg from '@/assets/projects/fasttracknew.webp';
-import fasttrackProImg from '@/assets/projects/fasttracknew2.jpeg';
-import medicarePlusImg from '@/assets/projects/medicare.jpg';
+import fasttrackProImg from '@/assets/projects/fasttracknew2.webp';
+import medicarePlusImg from '@/assets/projects/medicare.webp';
 import aiStudyHelperImg from '@/assets/projects/legallense.webp';
-import studentMgmtImg from '@/assets/projects/student.png';
+import studentMgmtImg from '@/assets/projects/student.webp';
 
 // Project data (static, outside component for referential stability)
 const projects = [

@@ -1,6 +1,6 @@
 import { motion, Variants } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import profilePhoto from '@/assets/profile-photo-bw.jpg';
+import profilePhoto from '@/assets/profile-photo-bw.webp';
 import { GlassCard } from './GlassCard';
 import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope, FaDownload } from 'react-icons/fa6';
 

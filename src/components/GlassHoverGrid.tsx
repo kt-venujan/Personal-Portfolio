@@ -4,25 +4,25 @@ import { Plus } from 'lucide-react';
 import { GridCard } from './GridCard';
 
 // Image imports (exact filenames)
-import americanCorner from '@/assets/journey/americanconrner.JPG?url';
-import aptitude from '@/assets/journey/Aptitude.jpg';
-import bohar from '@/assets/journey/bohar1.jpg';
-import ciccra from '@/assets/journey/ciccra.jpg';
-import codeStorm from '@/assets/journey/codesreom.jpg';
-import dreamin from '@/assets/journey/Dreamin.jpg';
-import fixora from '@/assets/journey/fixora.jpg';
-import leoProject1 from '@/assets/journey/Leo club Project.jpg';
-import leoProject2 from '@/assets/journey/Leo club Project 2.jpg';
-import leoProject3 from '@/assets/journey/Leo club Project 3.jpg';
-import sfWeekly from '@/assets/journey/sf weekly.jpg';
-import uoj1 from '@/assets/journey/uoj1.jpg';
-import uoj2 from '@/assets/journey/uoj2.jpg';
-import ygc from '@/assets/journey/YGC.jpg';
-import cricket from '@/assets/journey/cricket.jpg';
-import god from '@/assets/journey/extra1.jpg';
-import viva from '@/assets/journey/First viva.jpg';
-import rotract from '@/assets/journey/Rotract.jpg';
-import christmas from '@/assets/journey/Christmas.jpg';
+import americanCorner from '@/assets/journey/americanconrner.webp';
+import aptitude from '@/assets/journey/Aptitude.webp';
+import bohar from '@/assets/journey/bohar1.webp';
+import ciccra from '@/assets/journey/ciccra.webp';
+import codeStorm from '@/assets/journey/codesreom.webp';
+import dreamin from '@/assets/journey/Dreamin.webp';
+import fixora from '@/assets/journey/fixora.webp';
+import leoProject1 from '@/assets/journey/Leo club Project.webp';
+import leoProject2 from '@/assets/journey/Leo club Project 2.webp';
+import leoProject3 from '@/assets/journey/Leo club Project 3.webp';
+import sfWeekly from '@/assets/journey/sf weekly.webp';
+import uoj1 from '@/assets/journey/uoj1.webp';
+import uoj2 from '@/assets/journey/uoj2.webp';
+import ygc from '@/assets/journey/YGC.webp';
+import cricket from '@/assets/journey/cricket.webp';
+import god from '@/assets/journey/extra1.webp';
+import viva from '@/assets/journey/First viva.webp';
+import rotract from '@/assets/journey/Rotract.webp';
+import christmas from '@/assets/journey/Christmas.webp';
 // --- Type Definitions ---
 export type GridItemType = {
   id: string;

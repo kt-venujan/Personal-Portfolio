@@ -14,19 +14,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 // --- (All your image imports are the same) ---
-import week1Img from '../assets/sessions/week1.jpeg';
-
-import week2Img from '../assets/sessions/week2.jpeg';
-
-import week3Img from '../assets/sessions/week3.jpeg';
-
-import week4Img from '../assets/sessions/week4.jpeg';
-
-import week5Img from '../assets/sessions/week5.jpeg';
-
-import week6Img from '../assets/sessions/week6.jpeg';
-
-import week7Img from '../assets/sessions/week7.jpeg';
+import week1Img from '../assets/sessions/week1.webp';
+import week2Img from '../assets/sessions/week2.webp';
+import week3Img from '../assets/sessions/week3.webp';
+import week4Img from '../assets/sessions/week4.webp';
+import week5Img from '../assets/sessions/week5.webp';
+import week6Img from '../assets/sessions/week6.webp';
+import week7Img from '../assets/sessions/week7.webp';
 
 
 // --- (Your types and data are exactly the same) ---
@@ -204,6 +198,8 @@ export const MyJourneyInFrames: React.FC = () => {
               <img
                 src={item.imageUrl}
                 alt={item.title}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover"
                 onError={(e) => (e.currentTarget.src = 'https://placehold.co/1200x800?text=Image+Error')}
               />
