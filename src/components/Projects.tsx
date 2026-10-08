@@ -1,69 +1,70 @@
 import React, { lazy, Suspense, memo } from 'react';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
+import dietaraImg from '@/assets/projects-generated/dietara-hub.png';
+import seatSnapsImg from '@/assets/projects-generated/seatsnaps.png';
+import childrenImg from '@/assets/projects-generated/children-lk.png';
+import shoppingImg from '@/assets/projects-generated/mern-shopping.png';
+import tripImg from '@/assets/projects-generated/24trip.png';
+import fastTrackImg from '@/assets/projects-generated/fasttrack-java.png';
 
 // Lazy-load ProjectCard to split bundle
 const ProjectCard = lazy(() =>
   import('./ProjectCard').then((m) => ({ default: m.ProjectCard }))
 );
 
-// Image imports
-import fixoraImg from '@/assets/projects/fixora.webp';
-import guessFlagImg from '@/assets/projects/guess-flag.webp';
-import fasttrackSwingImg from '@/assets/projects/fasttracknew.webp';
-import fasttrackProImg from '@/assets/projects/fasttracknew2.webp';
-import medicarePlusImg from '@/assets/projects/medicare.webp';
-import aiStudyHelperImg from '@/assets/projects/legallense.webp';
-import studentMgmtImg from '@/assets/projects/student.webp';
+const projectImages = {
+	dietara: dietaraImg,
+	seatSnaps: seatSnapsImg,
+	children: childrenImg,
+	shopping: shoppingImg,
+	trip: tripImg,
+	fastTrack: fastTrackImg,
+};
 
 // Project data (static, outside component for referential stability)
 const projects = [
 	{
-		title: 'Fixora - Full Stack',
+		title: 'Dietara Hub',
 		description:
-			'A full-stack web platform connecting skilled workers like plumbers and electricians with clients, built by Team Elevate.',
-		tags: ['Laravel', 'React', 'MySQL', 'TailwindCSS'],
-		imageUrl: fixoraImg,
-		githubUrl: 'https://github.com/kt-venujan/Fixora-User',
+			'A health-tracking application with interactive dashboards, real-time data visualization, and a secure payment sandbox integration.',
+		tags: ['Next.js', 'Payment Gateway', 'Data Visualization'],
+		imageUrl: projectImages.dietara,
 	},
 	{
-		title: 'Guess The Flag Game',
+		title: 'SeatSnaps.com',
 		description:
-			'A fun Android app where users guess flags, track scores, and explore fun facts. Includes scoreboard, timer, and capital finder API.',
-		tags: ['Java', 'Android Studio', 'REST API', 'Google SSO'],
-		imageUrl: guessFlagImg,
-		githubUrl: 'https://github.com/kt-venujan/flaggame',
+			'A responsive booking interface and secure admin dashboard for real-time booking operations, protected by JWT authentication and route middleware.',
+		tags: ['Next.js', 'Tailwind CSS', 'JWT Auth'],
+		imageUrl: projectImages.seatSnaps,
+	},
+	{
+		title: 'Children.lk',
+		description:
+			'A fast, maintainable frontend integrated with complex REST APIs for seamless data synchronization and high-speed content delivery.',
+		tags: ['Next.js', 'REST APIs', 'Tailwind CSS'],
+		imageUrl: projectImages.children,
+	},
+	{
+		title: 'MERN Shopping App',
+		description:
+			'A full-stack e-commerce platform with JWT authentication, product browsing, cart and checkout flows, plus tools for managing products and orders.',
+		tags: ['MongoDB', 'Express.js', 'React', 'Node.js', 'JWT'],
+		imageUrl: projectImages.shopping,
+	},
+	{
+		title: '24Trip',
+		description:
+			'A responsive travel-focused web application designed to make discovering and planning trips simple and accessible across devices.',
+		tags: ['Web Application', 'Travel', 'Responsive UI'],
+		imageUrl: projectImages.trip,
 	},
 	{
 		title: 'FastTrack (Java Swing)',
 		description:
-			'A desktop quiz management system with add, delete, and preview features using CardLayout and interactive UI panels.',
+			'A desktop quiz management system with add, delete, and preview features, built with CardLayout and interactive Swing panels.',
 		tags: ['Java', 'Swing', 'NetBeans', 'OOP'],
-		imageUrl: fasttrackSwingImg,
+		imageUrl: projectImages.fastTrack,
 		githubUrl: 'https://github.com/kt-venujan/FastTrack',
-	},
-	{
-		title: 'FastTrack Pro (Spring Boot)',
-		description:
-			'An advanced version of FastTrack built with Spring Boot, offering web-based user management and improved modular structure.',
-		tags: ['Spring Boot', 'Thymeleaf', 'Maven', 'MySQL'],
-		imageUrl: fasttrackProImg,
-		githubUrl: 'https://github.com/kt-venujan/FastTrack_Pro',
-	},
-	{
-		title: 'AI Study Helper',
-		description:
-			'An AI-powered chatbot that helps students understand topics, generate summaries, and provide smart study recommendations.',
-		tags: ['OpenAI API', 'React', 'Node.js', 'Express'],
-		imageUrl: aiStudyHelperImg,
-		githubUrl: 'https://github.com/kt-venujan/Legal-Lens',
-	},
-	{
-		title: 'Student Management System',
-		description:
-			'A web-based student record system with dynamic CRUD operations and asynchronous updates using Node.js and AJAX.',
-		tags: ['Node.js', 'Express', 'AJAX', 'JSON'],
-		imageUrl: studentMgmtImg,
-		githubUrl: 'https://github.com/kt-venujan/Student-Managment-System',
 	},
 ];
 

@@ -122,9 +122,8 @@ const PortfolioStoryline: React.FC = () => {
                 <motion.div variants={itemVariants} transition={{ delay: 1.3 }} className="absolute max-w-[280px] leading-relaxed" style={{ top: '400px', left: '50px' }}>
                   <h3 className="font-bold text-lg text-foreground mb-1">Personal Educations</h3>
                   <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                    <li>Advanced Levels (A/L) - 2022</li>
-                    <li>Cybersecurity & Ethical Hacking - 2023</li>
-                    <li>BSc (Hons) Computer Science - 2024</li>
+                    <li>BSc (Hons) Computer Science - 2024–2027</li>
+                    <li>Cybersecurity &amp; Ethical Hacking - 2023</li>
                   </ul>
                 </motion.div>
 
@@ -132,8 +131,9 @@ const PortfolioStoryline: React.FC = () => {
                 <motion.div variants={itemVariants} transition={{ delay: 1.6 }} className="absolute max-w-[280px] text-center leading-relaxed" style={{ top: '210px', left: '50%', transform: 'translateX(-50%)' }}>
                   <h3 className="font-bold text-lg text-foreground mb-1">Professional Experiences</h3>
                   <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                    <li>Trainee IT Technician - 2023</li>
-                    <li>Intern Software Engineer - 2025</li>
+                    <li>Implementation Engineer, Apptimus - Sep 2026–Present</li>
+                    <li>Software Engineer Intern, Rispit - Apr–Sep 2026</li>
+                    <li>Software Engineer Intern, Code Vita - Jun–Dec 2025</li>
                   </ul>
                 </motion.div>
 
@@ -141,9 +141,9 @@ const PortfolioStoryline: React.FC = () => {
                 <motion.div variants={itemVariants} transition={{ delay: 1.9 }} className="absolute max-w-[280px] text-right leading-relaxed" style={{ top: '90px', right: '0' }}>
                   <h3 className="font-bold text-lg text-foreground mb-1">Relevant Projects</h3>
                   <ul className="text-sm text-muted-foreground list-none space-y-1">
-                    <li>Full Stack Web Apps</li>
-                    <li>Delivery Systems</li>
-                    <li>AI Projects</li>
+                    <li>Dietara Hub</li>
+                    <li>SeatSnaps.com</li>
+                    <li>Children.lk</li>
 
                   </ul>
                 </motion.div>
@@ -169,9 +169,8 @@ const PortfolioStoryline: React.FC = () => {
                   <span className="absolute -top-4 -right-2 text-8xl font-bold text-foreground/10 -z-10">1</span>
                   <h3 className="font-bold text-xl text-foreground mb-1">Personal Educations</h3>
                   <ul className="text-muted-foreground list-disc list-inside space-y-1">
-                    <li>Advanced Levels (A/L) - 2022</li>
-                    <li>Cybersecurity & Ethical Hacking - 2023</li>
-                    <li>BSc (Hons) Computer Science - 2024 (Reading)</li>
+                    <li>BSc (Hons) Computer Science - 2024–2027 (Reading)</li>
+                    <li>Cybersecurity &amp; Ethical Hacking - 2023</li>
                   </ul>
                 </GlassCard>
               </motion.div>
@@ -187,8 +186,9 @@ const PortfolioStoryline: React.FC = () => {
                   <span className="absolute -top-4 -right-2 text-8xl font-bold text-foreground/10 -z-10">2</span>
                   <h3 className="font-bold text-xl text-foreground mb-1">Professional Experiences</h3>
                   <ul className="text-muted-foreground list-disc list-inside space-y-1">
-                    <li>Trainee IT Technician - 2023</li>
-                    <li>Intern Software Engineer - 2025</li>
+                    <li>Implementation Engineer, Apptimus - Sep 2026–Present</li>
+                    <li>Software Engineer Intern, Rispit - Apr–Sep 2026</li>
+                    <li>Software Engineer Intern, Code Vita - Jun–Dec 2025</li>
                   </ul>
                 </GlassCard>
               </motion.div>
@@ -204,8 +204,10 @@ const PortfolioStoryline: React.FC = () => {
                   <span className="absolute -top-4 -right-2 text-8xl font-bold text-foreground/10 -z-10">3</span>
                   <h3 className="font-bold text-xl text-foreground mb-1">Relevant Projects</h3>
                   <ul className="text-muted-foreground list-none space-y-1">
-                    <li>FIXORA – Full Stack Web App</li>
-                    <li>Fasttrack – Delivery System</li>
+                    <li>Dietara Hub</li>
+                    <li>SeatSnaps.com</li>
+                    <li>Children.lk</li>
+                    <li>MERN Shopping App</li>
                   </ul>
                 </GlassCard>
               </motion.div>

@@ -128,7 +128,7 @@ const Skills: React.FC = () => {
         >
           I am from Sri Lanka and currently living in Jaffna.
           I am pursuing a Bachelor’s degree in Computer Science and will graduate in 2027.
-          I am a Software Engineer and a passionate Cybersecurity enthusiast, currently working as a freelancer.
+          I am an Implementation Engineer at Apptimus and a full-stack developer with a passion for cybersecurity.
         </motion.p>
 
         <div className="flex flex-col lg:flex-row"> {/* Added flex-col for mobile, flex-row for larger screens */}
@@ -158,6 +158,10 @@ const Skills: React.FC = () => {
                 <img
                   src={imgSrc}
                   alt={name}
+                  loading="lazy"
+                  decoding="async"
+                  width="64"
+                  height="64"
                   className="w-16 h-16 object-contain mb-4"
                 />
                 <span className="text-sm font-semibold tracking-wide">{name}</span>

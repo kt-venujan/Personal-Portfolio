@@ -9,7 +9,6 @@ const Skills = lazy(() => import('@/components/Skills'));
 const Projects = lazy(() => import('@/components/Projects').then(m => ({ default: m.Projects })));
 const AchievementsContact = lazy(() => import('@/components/Contacts').then(m => ({ default: m.AchievementsContact })));
 const Storyline = lazy(() => import('@/components/Storyline'));
-const MyJourneyInFrames = lazy(() => import('@/components/MyJourneyInFrames').then(m => ({ default: m.MyJourneyInFrames })));
 const GlassHoverGrid = lazy(() => import('@/components/GlassHoverGrid').then(m => ({ default: m.GlassHoverGrid })));
 const Certificates = lazy(() => import('@/components/Certificates').then(m => ({ default: m.Certificates })));
 
@@ -33,7 +32,6 @@ const Index = () => {
         <Storyline />
         <Skills />
         <Projects />
-        <MyJourneyInFrames />
         <GlassHoverGrid />
         <AchievementsContact />
       </Suspense>

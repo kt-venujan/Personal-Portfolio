@@ -4,25 +4,27 @@ import { Plus } from 'lucide-react';
 import { GridCard } from './GridCard';
 
 // Image imports (exact filenames)
-import americanCorner from '@/assets/journey/americanconrner.webp';
-import aptitude from '@/assets/journey/Aptitude.webp';
-import bohar from '@/assets/journey/bohar1.webp';
-import ciccra from '@/assets/journey/ciccra.webp';
-import codeStorm from '@/assets/journey/codesreom.webp';
-import dreamin from '@/assets/journey/Dreamin.webp';
-import fixora from '@/assets/journey/fixora.webp';
-import leoProject1 from '@/assets/journey/Leo club Project.webp';
-import leoProject2 from '@/assets/journey/Leo club Project 2.webp';
-import leoProject3 from '@/assets/journey/Leo club Project 3.webp';
-import sfWeekly from '@/assets/journey/sf weekly.webp';
-import uoj1 from '@/assets/journey/uoj1.webp';
-import uoj2 from '@/assets/journey/uoj2.webp';
-import ygc from '@/assets/journey/YGC.webp';
-import cricket from '@/assets/journey/cricket.webp';
-import god from '@/assets/journey/extra1.webp';
-import viva from '@/assets/journey/First viva.webp';
-import rotract from '@/assets/journey/Rotract.webp';
-import christmas from '@/assets/journey/Christmas.webp';
+import { cloudinaryImage } from '@/lib/cloudinary';
+
+const americanCorner = cloudinaryImage('journey/americanconrner', 'webp');
+const aptitude = cloudinaryImage('journey/Aptitude', 'webp');
+const bohar = cloudinaryImage('journey/bohar1', 'webp');
+const ciccra = cloudinaryImage('journey/ciccra', 'webp');
+const codeStorm = cloudinaryImage('journey/codesreom', 'webp');
+const dreamin = cloudinaryImage('journey/Dreamin', 'webp');
+const fixora = cloudinaryImage('journey/fixora', 'webp');
+const leoProject1 = cloudinaryImage('journey/Leo club Project', 'webp');
+const leoProject2 = cloudinaryImage('journey/Leo club Project 2', 'webp');
+const leoProject3 = cloudinaryImage('journey/Leo club Project 3', 'webp');
+const sfWeekly = cloudinaryImage('journey/sf weekly', 'webp');
+const uoj1 = cloudinaryImage('journey/uoj1', 'webp');
+const uoj2 = cloudinaryImage('journey/uoj2', 'webp');
+const ygc = cloudinaryImage('journey/YGC', 'webp');
+const cricket = cloudinaryImage('journey/cricket', 'webp');
+const god = cloudinaryImage('journey/extra1', 'webp');
+const viva = cloudinaryImage('journey/First viva', 'webp');
+const rotract = cloudinaryImage('journey/Rotract', 'webp');
+const christmas = cloudinaryImage('journey/Christmas', 'webp');
 // --- Type Definitions ---
 export type GridItemType = {
   id: string;

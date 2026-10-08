@@ -13,6 +13,8 @@ const iconPaths = [
   'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
 ];
 
+const FRAME_INTERVAL = 1000 / 30;
+
 interface Particle {
   x: number;
   y: number;
@@ -35,34 +37,12 @@ export const ParticleBackground: React.FC = () => {
   const animationFrameId = useRef<number | null>(null);
   const particles = useRef<Particle[]>([]);
   const loadedIcons = useRef<HTMLImageElement[]>([]);
+  const lastFrame = useRef(0);
 
-  const initParticles = (canvas: HTMLCanvasElement) => {
-    particles.current = [];
-    const particleCount = canvas.width > 768 ? 45 : 25;
-
-    if (!loadedIcons.current || loadedIcons.current.length === 0) {
-      console.error('Icons are not loaded yet!');
-      return;
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-      const randomIcon = loadedIcons.current[
-        Math.floor(Math.random() * loadedIcons.current.length)
-      ];
-
-      particles.current.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 25 + 20,
-        speedX: (Math.random() - 0.5) * 0.3,
-        speedY: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.4 + 0.6,
-        icon: randomIcon,
-      });
-    }
-  };
-
-  const animate = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
+  const animate = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, time = 0) => {
+    animationFrameId.current = requestAnimationFrame((nextTime) => animate(ctx, canvas, nextTime));
+    if (time - lastFrame.current < FRAME_INTERVAL) return;
+    lastFrame.current = time;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.current.forEach((particle, i) => {
@@ -71,11 +51,11 @@ export const ParticleBackground: React.FC = () => {
       particle.y += particle.speedY;
 
       // Wall bouncing
-      if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
-      if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+      if (particle.x < 0 || particle.x > canvas.clientWidth) particle.speedX *= -1;
+      if (particle.y < 0 || particle.y > canvas.clientHeight) particle.speedY *= -1;
 
       // Draw glow effect
-      ctx.shadowBlur = 50;
+      ctx.shadowBlur = 20;
       ctx.shadowColor = 'rgba(0, 191, 255, 0.8)';
 
       // Draw icon
@@ -130,7 +110,6 @@ export const ParticleBackground: React.FC = () => {
       }
     });
 
-    animationFrameId.current = requestAnimationFrame(() => animate(ctx, canvas));
   };
 
   useEffect(() => {
@@ -139,6 +118,8 @@ export const ParticleBackground: React.FC = () => {
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     // Load images from CDN URLs
     const loadImages = () => {
@@ -163,9 +144,26 @@ export const ParticleBackground: React.FC = () => {
       loadedIcons.current = loadedImageElements;
 
       const setCanvasSize = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        initParticles(canvas);
+        const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+        canvas.width = Math.round(window.innerWidth * ratio);
+        canvas.height = Math.round(window.innerHeight * ratio);
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        particles.current = [];
+        const particleCount = window.innerWidth > 768 ? 24 : 12;
+        for (let i = 0; i < particleCount; i++) {
+          const randomIcon = loadedIcons.current[Math.floor(Math.random() * loadedIcons.current.length)];
+          particles.current.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            size: Math.random() * 25 + 20,
+            speedX: (Math.random() - 0.5) * 0.3,
+            speedY: (Math.random() - 0.5) * 0.3,
+            opacity: Math.random() * 0.4 + 0.6,
+            icon: randomIcon,
+          });
+        }
       };
       setCanvasSize();
 
@@ -177,10 +175,20 @@ export const ParticleBackground: React.FC = () => {
         mouse.x = null;
         mouse.y = null;
       };
+      const handleVisibility = () => {
+        if (document.hidden && animationFrameId.current) {
+          cancelAnimationFrame(animationFrameId.current);
+          animationFrameId.current = null;
+        } else if (!document.hidden && animationFrameId.current === null) {
+          lastFrame.current = 0;
+          animationFrameId.current = requestAnimationFrame((time) => animate(ctx, canvas, time));
+        }
+      };
 
       window.addEventListener('resize', setCanvasSize);
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseleave', handleMouseLeave);
+      document.addEventListener('visibilitychange', handleVisibility);
 
       animate(ctx, canvas);
 
@@ -188,6 +196,7 @@ export const ParticleBackground: React.FC = () => {
         window.removeEventListener('resize', setCanvasSize);
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('mouseleave', handleMouseLeave);
+        document.removeEventListener('visibilitychange', handleVisibility);
         if (animationFrameId.current) {
           cancelAnimationFrame(animationFrameId.current);
         }
@@ -207,6 +216,8 @@ export const ParticleBackground: React.FC = () => {
     return () => {
       if (cleanup) cleanup();
     };
+  // The animation setup intentionally runs once; mutable frame state lives in refs.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -1,6 +1,8 @@
 import { motion, Variants } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import profilePhoto from '@/assets/profile-photo-bw.webp';
+import { cloudinaryImage } from '@/lib/cloudinary';
+
+const profilePhoto = cloudinaryImage('profile-photo-bw', 'webp', 448);
 import { GlassCard } from './GlassCard';
 import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope, FaDownload } from 'react-icons/fa6';
 
@@ -70,7 +72,11 @@ export const Hero: React.FC = () => {
           <div className="relative">
             <motion.img
               src={profilePhoto}
-              alt="Venujan Profile Avatar"
+              alt="Thirugnanam Venujan"
+              width="224"
+              height="224"
+              decoding="async"
+              fetchPriority="high"
               // ✨ UPDATED: Reduced avatar size for better mobile fit
               className="w-40 h-40 md:w-56 md:h-56 object-cover rounded-full border-4 border-border/20 
                          transition-all duration-300 ease-in-out"
@@ -112,9 +118,9 @@ export const Hero: React.FC = () => {
                     500,
                     "Hi, I'm Venujan 👋",
                     2000,
-                    "A React & AI Engineer",
+                    "An Implementation Engineer",
                     2000,
-                    "A Cybersecurity Enthusiast",
+                    "A Full-Stack Developer",
                     2000,
                   ]}
                   speed={50}

@@ -3,7 +3,7 @@ import { GlassCard } from './GlassCard';
 import { useRef } from 'react';
 import { School, Star } from 'lucide-react'; // ✨ UPDATED: Removed 'Award' icon
 
-const skills = ['Leadership', 'Adaptable', 'Time Managment','Communication'];
+const skills = ['Leadership', 'Adaptable', 'Time Management', 'Communication'];
 
 // --- (Variants are unchanged) ---
 const cardParentVariants: Variants = {
@@ -147,9 +147,9 @@ export const AboutMe = () => {
                     <div className="absolute -left-[34px] top-1 w-4 h-4 rounded-full bg-accent border-4 border-secondary" />
                     <School className="absolute -left-[42px] top-10 w-6 h-6 text-accent/70" />
                     <h3 className="text-xl font-semibold text-foreground mb-2">
-                      Computer Science Degree (Reading)
+                      BSc (Hons) in Computer Science (Reading)
                     </h3>
-                    <p className="text-muted-foreground">Sri Lanka Institute of Information Technology (SLIIT)</p>
+                    <p className="text-muted-foreground">University of Bedfordshire (UK), delivered via SLIIT City Uni</p>
                     <p className="text-sm text-muted-foreground/70 mt-1">2024 - 2027</p>
                   </motion.div>
                   {/* Timeline Item 2 */}

@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Home, FolderGit2, Zap, Mail, LucideIcon } from 'lucide-react';
 
 // --- DATA ---
@@ -37,7 +37,7 @@ const navBarVariants: Variants = {
 export const Navigation: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [scrollingUp, setScrollingUp] = useState(true);
-  const [lastScroll, setLastScroll] = useState(0);
+  const lastScroll = useRef(0);
 
   // Scroll detection
   useEffect(() => {
@@ -45,13 +45,14 @@ export const Navigation: React.FC = () => {
       const currentScroll = window.pageYOffset;
       if (currentScroll < 0) return;
 
-      setScrollingUp(currentScroll < lastScroll || currentScroll < 50);
-      setLastScroll(currentScroll);
+      const nextScrollingUp = currentScroll < lastScroll.current || currentScroll < 50;
+      setScrollingUp((current) => current === nextScrollingUp ? current : nextScrollingUp);
+      lastScroll.current = currentScroll;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScroll]);
+  }, []);
 
   // Scroll to section
   const scrollToSection = (id: string) => {

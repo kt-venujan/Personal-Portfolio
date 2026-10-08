@@ -32,6 +32,8 @@ export const GridCard: React.FC<GridCardProps> = ({ item }) => (
     <img
       src={item.imageUrl}
       alt={item.title}
+      loading="lazy"
+      decoding="async"
       className="absolute inset-0 w-full h-full object-cover"
       style={{ filter: 'grayscale(30%) brightness(0.9)', transition: 'filter 0.3s ease-out' }}
     />
