@@ -43,7 +43,7 @@ export const AboutMe = () => {
   const yRight = useTransform(scrollYProgress, [0, 1], [0, -50]);
   
   return (
-    <section ref={ref} className="min-h-screen py-20 px-4 relative overflow-hidden">
+    <section id="about" ref={ref} className="min-h-screen py-20 px-4 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           
@@ -56,10 +56,10 @@ export const AboutMe = () => {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
               >
-                <motion.h2 variants={cardItemVariants} className="text-4xl font-bold mb-6 text-foreground">About Me</motion.h2>
+                <motion.h2 variants={cardItemVariants} className="text-4xl font-bold mb-6 text-foreground">About Venujan</motion.h2>
                 <motion.div variants={cardItemVariants} className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    I'm a passionate developer who loves turning{' '}
+                    I'm Thirugnanam Venujan, an Implementation Engineer and full-stack developer in Jaffna, Sri Lanka. I love turning{' '}
                     <motion.span
                       className="text-accent font-semibold cursor-pointer"
                       whileHover={{ textShadow: '0 0 8px hsl(var(--neon-blue))' }}

@@ -25,6 +25,7 @@ const Index = () => {
     <div className="relative min-h-screen">
       <ParticleBackground />
       <Navigation />
+      <main id="main-content">
       <Hero />
       <Suspense fallback={<SectionLoader />}>
         <AboutMe />
@@ -35,6 +36,7 @@ const Index = () => {
         <GlassHoverGrid />
         <AchievementsContact />
       </Suspense>
+      </main>
     </div>
   );
 };
