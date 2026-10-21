@@ -112,28 +112,25 @@ export const Hero: React.FC = () => {
               {/* ✨ Typing Text Animation */}
               {/* ✨ UPDATED: Made h1 font size responsive for mobile */}
               <motion.h1 variants={itemVariants} className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 text-foreground">
+                <span className="neon-text-gradient">Thirugnanam Venujan</span>
+              </motion.h1>
+              <div aria-hidden="true" className="text-xl sm:text-2xl text-foreground min-h-16 sm:min-h-8">
                 <TypeAnimation
                   sequence={[
-                    "Hi, I'm ",
-                    500,
-                    "Hi, I'm Venujan 👋",
-                    2000,
-                    "An Implementation Engineer",
-                    2000,
-                    "A Full-Stack Developer",
-                    2000,
+                    "Hi, I'm Venujan", 2000,
+                    "An Implementation Engineer", 2000,
+                    "A Full-Stack Developer", 2000,
                   ]}
                   speed={50}
                   repeat={Infinity}
                   wrapper="span"
-                  className="neon-text-gradient"
                 />
-              </motion.h1>
+              </div>
 
               {/* Value Proposition */}
               {/* ✨ UPDATED: Made subtitle font size responsive for mobile */}
               <motion.p variants={itemVariants} className="text-base sm:text-lg md:text-xl text-muted-foreground mt-2">
-                Never stop learning, because life never stops teaching.
+                Implementation Engineer and full-stack developer based in Jaffna, Sri Lanka. Explore my projects, skills, and journey in technology.
               </motion.p>
             </motion.div>
           </GlassCard>

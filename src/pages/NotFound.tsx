@@ -5,7 +5,16 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
+    const previousTitle = document.title;
+    const robots = document.querySelector('meta[name="robots"]');
+    const previousRobots = robots?.getAttribute('content');
+    document.title = 'Page not found | Venujan';
+    robots?.setAttribute('content', 'noindex, follow');
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+    return () => {
+      document.title = previousTitle;
+      if (previousRobots) robots?.setAttribute('content', previousRobots);
+    };
   }, [location.pathname]);
 
   return (

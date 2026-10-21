@@ -79,9 +79,14 @@ export const Navigation: React.FC = () => {
         {navItems.map((item, index) => {
           const IconComponent: LucideIcon = item.icon;
           return (
-            <motion.button
+            <motion.a
               key={item.id}
-              onClick={() => scrollToSection(item.id)}
+              href={`#${item.id}`}
+              onClick={(event) => {
+                event.preventDefault();
+                window.history.replaceState(null, '', `#${item.id}`);
+                scrollToSection(item.id);
+              }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               whileHover={{ scale: 1.08 }}
@@ -95,7 +100,7 @@ export const Navigation: React.FC = () => {
                   {item.name}
                 </span>
               )}
-            </motion.button>
+            </motion.a>
           );
         })}
       </div>
